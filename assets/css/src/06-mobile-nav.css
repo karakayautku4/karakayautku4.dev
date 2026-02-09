@@ -1,0 +1,149 @@
+/**
+ * 6. Mobile Navigation Components
+ * Hamburger menu and responsive navigation
+ */
+
+/* Mobile Navigation Toggle */
+.nav-toggle {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: calc(var(--z-header) + 2);
+  flex-direction: column;
+  gap: 5px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  padding: 10px;
+  transition: all var(--transition-fast);
+}
+
+.nav-toggle:hover {
+  background: var(--bg);
+  border-color: var(--brand);
+}
+
+.nav-toggle:active {
+  transform: scale(0.95);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  transition: all var(--transition-normal);
+  border-radius: 2px;
+}
+
+.nav-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.nav-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 480px) {
+  .nav-toggle {
+    top: 16px;
+    left: 16px;
+    padding: 9px;
+  }
+  
+  .nav-toggle span {
+    width: 18px;
+  }
+}
+
+/* Mobile Navigation Responsive */
+@media (max-width: 768px) {
+  .nav-toggle {
+    display: flex;
+  }
+  
+  .site-header {
+    left: -100%;
+    width: 280px;
+    max-width: 85vw;
+    transition: left var(--transition-normal);
+    padding: 70px 20px 30px 20px;
+  }
+  
+  .site-header.active {
+    left: 0;
+  }
+  
+  .secondary-sidebar {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  .mobile-secondary-menu {
+    display: block;
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border);
+  }
+  
+  .mobile-secondary-menu .sidebar-title {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+  
+  .nav-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: var(--z-overlay);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-normal);
+    backdrop-filter: blur(2px);
+  }
+  
+  .nav-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .profile-section {
+    margin-bottom: 24px;
+  }
+  
+  .profile-photo {
+    width: 38px;
+    height: 38px;
+  }
+  
+  .brand {
+    font-size: 0.95rem;
+  }
+  
+  .profile-title {
+    font-size: 0.7rem;
+  }
+  
+  .nav a {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .sidebar-title {
+    font-size: 0.65rem;
+    margin: var(--spacing-md) 0 var(--spacing-xs) 0;
+    padding-top: var(--spacing-md);
+  }
+  
+  .social-links a {
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+}

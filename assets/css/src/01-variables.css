@@ -1,0 +1,61 @@
+/**
+ * 1. CSS Variables & Theme
+ * Design tokens for consistent styling
+ */
+
+:root {
+  /* Colors */
+  --bg: #0d1117;
+  --bg-secondary: #161b22;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --border: #30363d;
+  --brand: #58a6ff;
+  --accent: #58a6ff;
+  --accent-secondary: #8b5cf6;
+  
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 24px;
+  --spacing-3xl: 28px;
+  
+  /* Typography */
+  --font-family-base: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-size-base: 16px;
+  --line-height-base: 1.6;
+  
+  /* Transitions */
+  --transition-fast: 0.12s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.35s ease;
+  
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  
+  /* Z-index */
+  --z-header: 100;
+  --z-nav-mobile: 99;
+  --z-overlay: 98;
+  --z-skip-link: 9999;
+  
+  /* 
+   * Breakpoints Reference
+   * Use these values in @media queries:
+   * - Small (mobile): max-width: 480px  (--breakpoint-sm)
+   * - Medium (tablet): max-width: 720px (--breakpoint-md)
+   * - Large (tablet landscape): max-width: 768px (--breakpoint-lg)
+   * - Extra large (desktop): max-width: 1200px (--breakpoint-xl)
+   */
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 720px;
+  --breakpoint-lg: 768px;
+  --breakpoint-xl: 1200px;
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bookmarks | karakayautku4</title>
+  <meta name="description" content="Utku Karakaya's favorite websites, articles, tools, and resources.">
+  <link rel="canonical" href="https://karakayautku4.dev/pages/bookmarks.html">
+  <meta property="og:title" content="Bookmarks | Utku Karakaya">
+  <meta property="og:description" content="My favorite websites and resources">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://karakayautku4.dev/pages/bookmarks.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="icon" href="https://karakayautku4.dev/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Utku Karakaya",
+  "url": "https://karakayautku4.dev",
+  "description": "Software Test Automation Engineer / Python Developer"
+}
+  </script>
+</head>
+<body class="bookmarks-page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header"></header>
+
+  <main class="main-content" id="main-content">
+    <div class="container">
+      <section class="section">
+        <h1>Bookmarks</h1>
+        <p class="text-muted">Websites, articles, and resources I find inspiring and useful</p>
+      </section>
+
+      <section class="section">
+        <div class="workspace-grid bookmarks-grid" id="bookmarks-grid">
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="../assets/js/app.js"></script>
+  <script type="module">
+    import { generateBookmarksGrid } from '../assets/js/modules/bookmarks-data.js';
+    
+    const grid = document.getElementById('bookmarks-grid');
+    if (grid) {
+      grid.innerHTML = generateBookmarksGrid();
+    }
+  </script>
+</body>
+</html>

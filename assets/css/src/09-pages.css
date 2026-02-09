@@ -1,0 +1,381 @@
+/**
+ * 9. Hobbies & Bookmarks Page Components
+ * Page-specific backgrounds and grid layouts
+ */
+
+/* Home page - Dot pattern */
+body.home-page {
+  background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.2" fill="%2330363d" opacity="0.35"/></svg>');
+  background-size: 32px 32px;
+}
+
+/* Workspace page - Dot pattern (same as home) */
+body.workspace-page {
+  background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="2" cy="2" r="1.2" fill="%2330363d" opacity="0.35"/></svg>');
+  background-size: 32px 32px;
+}
+
+/* About page - Briefcase pattern */
+body.about-page {
+  background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="13" width="12" height="8" rx="0.5" fill="none" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/><rect x="13" y="10" width="6" height="3" fill="none" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/><line x1="16" y1="13" x2="16" y2="21" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/></svg>');
+  background-size: 32px 32px;
+}
+
+/* Projects page - Code/terminal pattern */
+body.projects-page {
+  background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><polyline points="11 13 14 16 11 19" fill="none" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/><line x1="16" y1="19" x2="20" y2="19" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/><rect x="8" y="10" width="16" height="12" rx="0.5" fill="none" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/></svg>');
+  background-size: 32px 32px;
+}
+
+/* Watch pattern background for hobbies */
+body.hobbies-page {
+  background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="7" fill="none" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/><line x1="16" y1="16" x2="16" y2="11" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/><line x1="16" y1="16" x2="19" y2="16" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/></svg>');
+  background-size: 32px 32px;
+}
+
+/* Bookmark pattern background */
+body.bookmarks-page {
+  background-image: url('data:image/svg+xml;utf8,<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M20 7 L20 22 L16 19 L12 22 L12 7 L20 7" fill="none" stroke="%2330363d" stroke-width="0.7" opacity="0.35"/></svg>');
+  background-size: 32px 32px;
+}
+
+/* Hobbies Grid - Minimal List Layout */
+.hobbies-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  max-width: 700px;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.hobbies-page .section h2 {
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.hobby-showcase {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  padding: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.hobby-showcase:hover {
+  opacity: 0.8;
+}
+
+.hobby-image-section {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  background: rgba(88, 166, 255, 0.03);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(88, 166, 255, 0.1);
+}
+
+.hobby-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 12px;
+}
+
+.hobby-emoji {
+  font-size: 3rem;
+}
+
+.hobby-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.hobby-header h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 2px 0;
+  line-height: 1.3;
+}
+
+.hobby-category {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.hobby-description {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 4px 0;
+}
+
+.hobby-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.hobby-spec {
+  font-size: 0.75rem;
+  color: var(--muted);
+  line-height: 1.4;
+  display: flex;
+  gap: 6px;
+}
+
+.hobby-spec span {
+  color: var(--text);
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .hobbies-grid {
+    gap: 32px;
+  }
+  
+  .hobby-showcase {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .hobby-image-section {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .hobby-emoji {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hobbies-grid {
+    gap: 24px;
+    padding: 10px 0;
+  }
+  
+  .hobby-image-section {
+    width: 90px;
+    height: 90px;
+  }
+  
+  .hobby-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .hobby-description {
+    font-size: 0.8125rem;
+  }
+}
+
+/* Bookmarks Grid - Compact List Layout */
+.bookmarks-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  max-width: 1000px;
+  margin: 0 auto;
+  background: var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.bookmark-card {
+  background: var(--bg-secondary);
+  padding: 20px 24px;
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  position: relative;
+  border-left: 3px solid transparent;
+}
+
+.bookmark-card:hover {
+  background: var(--bg);
+  border-left-color: var(--accent);
+}
+
+.bookmark-card:hover .bookmark-icon {
+  transform: scale(1.1);
+}
+
+.bookmark-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-normal);
+}
+
+.bookmark-favicon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px;
+}
+
+.bookmark-emoji {
+  font-size: 1.5rem;
+  opacity: 0.9;
+}
+
+.bookmark-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.bookmark-header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bookmark-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.bookmark-author {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.bookmark-description {
+  font-size: 0.875rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.bookmark-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.bookmark-category {
+  font-size: 0.75rem;
+  color: var(--accent);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.bookmark-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.bookmark-tag {
+  font-size: 0.75rem;
+  color: var(--muted);
+  background: rgba(139, 148, 158, 0.1);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 400;
+  transition: all var(--transition-fast);
+}
+
+.bookmark-card:hover .bookmark-tag {
+  background: rgba(139, 148, 158, 0.15);
+  color: var(--text);
+}
+
+.bookmark-card::after {
+  content: '↗';
+  font-size: 1rem;
+  color: var(--muted);
+  opacity: 0;
+  margin-left: auto;
+  transition: all var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.bookmark-card:hover::after {
+  opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+  .bookmark-card {
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px 20px;
+  }
+  
+  .bookmark-icon {
+    font-size: 1.5rem;
+  }
+  
+  .bookmark-header {
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+  }
+  
+  .bookmark-card::after {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .bookmarks-grid {
+    border-radius: 8px;
+  }
+  
+  .bookmark-card {
+    padding: 14px 16px;
+    gap: 10px;
+  }
+  
+  .bookmark-header h3 {
+    font-size: 0.9375rem;
+  }
+  
+  .bookmark-description {
+    font-size: 0.8125rem;
+  }
+  
+  .bookmark-icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .bookmark-favicon {
+    width: 20px;
+    height: 20px;
+  }
+}

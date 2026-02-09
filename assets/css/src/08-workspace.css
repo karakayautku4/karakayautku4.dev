@@ -1,0 +1,313 @@
+/**
+ * 8. Workspace Grid - Circular Bento Layout
+ * Interactive workspace item grid with 3D effects
+ */
+
+.workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 20px;
+  margin-top: var(--spacing-xl);
+}
+
+@media (max-width: 768px) {
+  .workspace-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .workspace-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+  }
+}
+
+.workspace-item {
+  background: linear-gradient(135deg, var(--bg) 0%, var(--bg-secondary) 100%);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  padding: 20px;
+  transition: all var(--transition-slow);
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Stagger animation delays */
+.workspace-item:nth-child(1) { animation-delay: 0s; }
+.workspace-item:nth-child(2) { animation-delay: 0.3s; }
+.workspace-item:nth-child(3) { animation-delay: 0.6s; }
+.workspace-item:nth-child(4) { animation-delay: 0.9s; }
+.workspace-item:nth-child(5) { animation-delay: 1.2s; }
+.workspace-item:nth-child(6) { animation-delay: 1.5s; }
+.workspace-item:nth-child(7) { animation-delay: 1.8s; }
+.workspace-item:nth-child(8) { animation-delay: 2.1s; }
+.workspace-item:nth-child(9) { animation-delay: 2.4s; }
+.workspace-item:nth-child(10) { animation-delay: 2.7s; }
+.workspace-item:nth-child(11) { animation-delay: 3s; }
+
+/* Glow effect */
+.workspace-item::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    rgba(88, 166, 255, 0.4), 
+    rgba(139, 92, 246, 0.4), 
+    rgba(236, 72, 153, 0.4),
+    rgba(88, 166, 255, 0.4)
+  );
+  border-radius: 50%;
+  opacity: 0;
+  z-index: -1;
+  filter: blur(20px);
+  transition: opacity var(--transition-slow);
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.workspace-item:hover::before {
+  opacity: 1;
+}
+
+/* Ripple effect */
+.workspace-item::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(88, 166, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s, opacity 0.6s;
+  opacity: 0;
+}
+
+.workspace-item:active::after {
+  width: 300%;
+  height: 300%;
+  opacity: 0;
+}
+
+/* Grid Sizes */
+.workspace-item-large,
+.workspace-item-medium,
+.workspace-item-small {
+  grid-column: span 1;
+}
+
+/* Hero items */
+.workspace-item-hero {
+  transform: scale(1.1);
+  box-shadow: 0 10px 40px rgba(88, 166, 255, 0.3);
+  background: radial-gradient(circle at center, rgba(88, 166, 255, 0.05) 0%, var(--bg) 70%);
+  border: 2px solid rgba(88, 166, 255, 0.2);
+}
+
+.workspace-item-hero:hover {
+  transform: scale(1.15) translateY(-6px) rotateX(5deg);
+  box-shadow: 0 20px 60px rgba(88, 166, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .workspace-item-hero {
+    transform: scale(1);
+  }
+  
+  .workspace-item-hero:hover {
+    transform: scale(1.05) translateY(-4px);
+  }
+}
+
+@media (max-width: 480px) {
+  .workspace-item {
+    padding: 16px;
+  }
+  
+  .workspace-item-hero {
+    transform: scale(1);
+  }
+  
+  .workspace-item:hover {
+    transform: translateY(-4px) scale(1.05);
+  }
+  
+  .workspace-item-emoji {
+    font-size: 3rem;
+  }
+}
+
+/* Interactive hover effects */
+.workspace-item:hover {
+  border-color: rgba(88, 166, 255, 0.6);
+  box-shadow: 0 10px 30px rgba(88, 166, 255, 0.3);
+  animation-play-state: paused;
+  transform: translateY(-8px) scale(1.08);
+}
+
+/* Images */
+.workspace-item-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.95;
+  transition: all var(--transition-slow);
+  z-index: 0;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+  mix-blend-mode: lighten;
+  border-radius: 50%;
+}
+
+.workspace-item:hover .workspace-item-image {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1.15) rotate(5deg);
+  filter: drop-shadow(0 8px 24px rgba(88, 166, 255, 0.5));
+}
+
+/* Emoji Fallback */
+.workspace-item-emoji {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 4rem;
+  opacity: 0.8;
+  transition: all var(--transition-slow);
+  z-index: 0;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+}
+
+.workspace-item:hover .workspace-item-emoji {
+  transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
+  opacity: 1;
+  filter: drop-shadow(0 8px 24px rgba(88, 166, 255, 0.6));
+}
+
+/* Content */
+.workspace-item-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  background: rgba(13, 17, 23, 0.92);
+  backdrop-filter: blur(12px);
+  padding: 10px 14px;
+  border-radius: 50px;
+  border: 1px solid rgba(88, 166, 255, 0.2);
+  margin-top: auto;
+  width: 90%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.workspace-item-hero .workspace-item-content {
+  background: rgba(13, 17, 23, 0.95);
+  border-color: rgba(88, 166, 255, 0.3);
+}
+
+.workspace-item h3 {
+  font-size: 0.75rem;
+  margin: 0 0 2px 0;
+  color: var(--text);
+  transition: color var(--transition-fast);
+  line-height: 1.2;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.workspace-item-large h3,
+.workspace-item-medium h3 {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.workspace-item .text-muted {
+  font-size: 0.625rem;
+  margin: 0;
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.workspace-item:hover h3 {
+  color: var(--brand);
+}
+
+.workspace-item:hover .workspace-item-content {
+  border-color: var(--brand);
+  background: rgba(13, 17, 23, 0.98);
+  box-shadow: 0 6px 16px rgba(88, 166, 255, 0.3);
+}
+
+/* Small items */
+.workspace-item-small .workspace-item-content {
+  padding: 8px 12px;
+}
+
+.workspace-item-small h3 {
+  font-size: 0.6875rem;
+}
+
+.workspace-item-small .text-muted {
+  font-size: 0.5625rem;
+}
+
+.workspace-item-small .workspace-item-image {
+  width: 65%;
+  height: 65%;
+}
+
+/* Large items */
+.workspace-item-large .workspace-item-image,
+.workspace-item-medium .workspace-item-image {
+  width: 80%;
+  height: 80%;
+}

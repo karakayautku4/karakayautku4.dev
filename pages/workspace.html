@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Workspace | karakayautku4</title>
+  <meta name="description" content="Utku Karakaya's workspace, tools, and setup.">
+  <link rel="canonical" href="https://karakayautku4.dev/pages/workspace.html">
+  <meta property="og:title" content="Workspace | Utku Karakaya">
+  <meta property="og:description" content="My workspace equipment and setup">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://karakayautku4.dev/pages/workspace.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/main.css">
+  <link rel="icon" href="https://karakayautku4.dev/favicon.svg" type="image/svg+xml">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Utku Karakaya",
+  "url": "https://karakayautku4.dev",
+  "description": "Software Test Automation Engineer / Python Developer"
+}
+  </script>
+</head>
+<body class="workspace-page">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <header class="site-header"></header>
+
+  <main class="main-content" id="main-content">
+    <div class="container">
+      <section class="section">
+        <h1>Workspace</h1>
+        <p class="text-muted">The equipment and tools I use daily</p>
+      </section>
+
+      <section class="section">
+        <div class="workspace-grid" id="workspace-grid">
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script type="module" src="../assets/js/app.js"></script>
+  <script type="module">
+    import { generateWorkspaceGrid } from '../assets/js/modules/workspace-data.js';
+    import { initWorkspace3D } from '../assets/js/modules/workspace-3d.js';
+    
+    const grid = document.getElementById('workspace-grid');
+    if (grid) {
+      grid.innerHTML = generateWorkspaceGrid();
+      initWorkspace3D();
+    }
+  </script>
+</body>
+</html>

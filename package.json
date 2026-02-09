@@ -1,0 +1,30 @@
+{
+  "name": "karakayautku4.dev",
+  "version": "1.0.0",
+  "description": "Personal website of Utku Karakaya - Software Test Automation Engineer",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "watch": "node build.js --watch",
+    "build:css": "node build.js --css",
+    "build:html": "node build.js --html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karakayautku4/karakayautku4.dev.git"
+  },
+  "keywords": [
+    "personal-website",
+    "github-pages"
+  ],
+  "author": "Utku Karakaya",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/karakayautku4/karakayautku4.dev/issues"
+  },
+  "homepage": "https://karakayautku4.dev",
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

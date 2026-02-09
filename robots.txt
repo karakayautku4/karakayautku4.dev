@@ -1,0 +1,8 @@
+# robots.txt for Utku Karakaya personal website
+# https://karakayautku4.dev/
+
+User-agent: *
+Allow: /
+
+# Sitemap helps search engines find all your pages
+Sitemap: https://karakayautku4.dev/sitemap.xml
