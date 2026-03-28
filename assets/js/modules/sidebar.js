@@ -379,6 +379,10 @@ export class Sidebar {
 
     dockWindowLinks.forEach((link) => {
       link.addEventListener('click', async (e) => {
+        if (!window.matchMedia('(min-width: 861px)').matches) {
+          return;
+        }
+
         e.preventDefault();
         const windowType = link.getAttribute('data-desktop-window');
         await this.openDesktopWindow(windowType, link.getAttribute('href'));

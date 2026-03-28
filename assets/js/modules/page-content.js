@@ -137,10 +137,6 @@ export const PAGE_TEMPLATES = {
           <div class="page-actions">
             ${renderActions(ABOUT_COPY.actions)}
           </div>` : ''}
-          <div class="about-onboarding-note" aria-label="How to use this site">
-            <p class="about-onboarding-label">Start Here</p>
-            <p>Use the dock to open sections, drag windows by their titlebars, and double-click a titlebar to zoom a window.</p>
-          </div>
         </div>
 
         <div class="highlights-grid" id="about-highlights"></div>

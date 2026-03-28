@@ -55,32 +55,6 @@ body.not-found-page {
   background-size: auto, auto, 36px 36px;
 }
 
-.about-onboarding-note {
-  margin-top: 20px;
-  padding: 16px 18px;
-  border-radius: 20px;
-  border: 1px solid rgba(125, 211, 252, 0.14);
-  background:
-    radial-gradient(circle at 12% 16%, rgba(125, 211, 252, 0.12), transparent 28%),
-    linear-gradient(180deg, rgba(14, 25, 42, 0.84), rgba(9, 17, 31, 0.78));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-}
-
-.about-onboarding-label {
-  margin: 0 0 8px;
-  font-family: var(--font-family-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(125, 211, 252, 0.84);
-}
-
-.about-onboarding-note p:last-child {
-  margin: 0;
-  color: rgba(226, 232, 240, 0.8);
-  line-height: 1.65;
-}
-
 /* Hobbies Grid - Minimal List Layout */
 .hobbies-grid {
   display: flex;
