@@ -2538,6 +2538,11 @@ body.desktop-home-active #page-content {
     gap: 10px;
   }
 
+  .home-page .signal-card[data-signal-label="location"],
+  .home-page .signal-card[data-signal-label="site-intent"] {
+    display: none;
+  }
+
   .signal-card {
     padding: 15px 15px 13px;
   }

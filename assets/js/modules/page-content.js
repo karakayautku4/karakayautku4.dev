@@ -23,9 +23,10 @@ function renderHomeSignals(signals) {
     const isCardLink = signal.href && !isEmbeddedMap && signal.cardLink !== false;
     const tagName = isCardLink ? 'a' : 'article';
     const className = `${isCardLink ? 'signal-card signal-card-link' : 'signal-card'}${signal.cardClass ? ` ${signal.cardClass}` : ''}`;
+    const signalKey = signal.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
     const attrs = isCardLink
-      ? ` href="${signal.href}" class="${className}"${signal.external ? ' target="_blank" rel="noopener noreferrer"' : ''}`
-      : ` class="${className}"`;
+      ? ` href="${signal.href}" class="${className}" data-signal-label="${signalKey}"${signal.external ? ' target="_blank" rel="noopener noreferrer"' : ''}`
+      : ` class="${className}" data-signal-label="${signalKey}"`;
 
     const visual = signal.visual === 'map'
       ? signal.embedUrl
