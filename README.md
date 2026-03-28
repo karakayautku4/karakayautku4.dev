@@ -4,14 +4,16 @@ Personal website of Utku Karakaya, built as a static site with vanilla HTML, CSS
 
 ## Overview
 
-The site combines a traditional multi-page structure with a desktop-style homepage experience.
+The site combines a traditional multi-page structure with a desktop-style homepage experience on larger screens.
 
 Current highlights:
-- Desktop-inspired home screen with draggable, resizable app windows
+- Desktop-inspired home screen with draggable, resizable app windows, menubar, dock, and desktop shortcuts
+- Separate mobile home experience with the standard page layout instead of the desktop runtime
 - Custom profile windows for social platforms that do not embed reliably
 - GitHub profile app powered by public GitHub API data
 - In-window CV document viewer
 - Photos app backed by local image assets
+- Message Me desktop app that opens a prefilled email draft to `k4utku@gmail.com`
 - Static build pipeline for HTML, CSS, and sitemap generation
 
 ## Stack
@@ -21,17 +23,29 @@ Current highlights:
 - Vanilla JavaScript modules
 - Node.js build script
 
+## Runtime Notes
+
+- Desktop mode is enabled on the homepage above the desktop breakpoint and runs through the desktop runtime module.
+- Mobile and smaller tablet widths fall back to the standard responsive homepage layout.
+- Internal pages remain static multi-page documents and can also be rendered in embedded mode for desktop windows.
+
 ## Project Structure
 
 ```text
 .
+├── .github/
+│   └── workflows/
 ├── assets/
 │   ├── css/
+│   │   └── src/
 │   ├── images/
 │   └── js/
+│       └── modules/
 ├── pages/
 ├── build.js
+├── CNAME
 ├── index.html
+├── package.json
 ├── robots.txt
 └── sitemap.xml
 ```
@@ -40,6 +54,9 @@ Current highlights:
 
 Requirements:
 - Node.js 18+
+
+Recommended:
+- Node.js 24 locally if you want parity with the GitHub Pages workflow
 
 Available scripts:
 
@@ -56,7 +73,16 @@ This project is structured for static hosting and is currently configured for Gi
 
 - https://karakayautku4.dev
 
-Before deploying, run:
+Deployments are handled automatically on pushes to `main` through GitHub Actions in `.github/workflows/deploy.yml`.
+
+The workflow currently uses:
+- `actions/checkout@v6`
+- `actions/setup-node@v6` with Node.js 24
+- `actions/configure-pages@v6`
+- `actions/upload-pages-artifact@v4`
+- `actions/deploy-pages@v5`
+
+Before pushing deployment-related changes, run:
 
 ```bash
 npm run build
