@@ -1,0 +1,567 @@
+/**
+ * 7. Card Components
+ * Cards, highlight cards, company cards, and coming soon components
+ */
+
+/* Basic Card */
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid rgba(147, 165, 188, 0.16);
+  border-radius: 24px;
+  text-decoration: none;
+  color: inherit;
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 252, 0.1), transparent 28%),
+    linear-gradient(180deg, rgba(17, 26, 43, 0.96), rgba(9, 17, 31, 0.92));
+  transition: transform var(--transition-fast), background var(--transition-normal), border var(--transition-normal), box-shadow var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  min-height: 152px;
+  box-shadow: var(--shadow-soft);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.1) 0%, transparent 46%, rgba(245, 158, 11, 0.06));
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 252, 0.15), transparent 26%),
+    linear-gradient(180deg, rgba(23, 35, 56, 0.98), rgba(9, 17, 31, 0.96));
+  border-color: rgba(125, 211, 252, 0.28);
+  box-shadow: var(--shadow-brand);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:active {
+  transform: translateY(-2px);
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: var(--type-title-sm);
+  font-weight: 700;
+  transition: color var(--transition-fast);
+  line-height: 1.35;
+  position: relative;
+  padding-right: 24px;
+}
+
+.card h2::after {
+  content: '→';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card:hover h2 {
+  color: var(--brand);
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--type-body);
+  line-height: 1.62;
+  transition: color var(--transition-fast);
+}
+
+.card:hover p {
+  color: var(--text);
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 14px 16px;
+    min-height: 80px;
+  }
+
+  .card h2 {
+    font-size: 0.94rem;
+    padding-right: 22px;
+  }
+
+  .card h2::after {
+    font-size: 0.9rem;
+  }
+
+  .card p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Highlight Cards */
+.highlight-card {
+  position: relative;
+  overflow: hidden;
+  padding: 18px;
+  border: 1px solid rgba(147, 165, 188, 0.18);
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 84% 14%, rgba(125, 211, 252, 0.16), transparent 24%),
+    linear-gradient(180deg, rgba(20, 31, 50, 0.98), rgba(9, 17, 31, 0.94));
+  box-shadow: 0 18px 34px rgba(2, 6, 23, 0.18);
+  transition: transform var(--transition-fast), border-color var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.highlight-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 40%);
+  pointer-events: none;
+}
+
+.highlight-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, 0.28);
+  box-shadow: 0 22px 38px rgba(2, 6, 23, 0.22);
+}
+
+.compact-highlight-card {
+  min-height: 100%;
+}
+
+.highlight-label {
+  position: relative;
+  margin-bottom: 8px;
+  color: var(--accent);
+  font-family: var(--font-family-mono);
+  font-size: var(--type-label);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.highlight-card h2 {
+  position: relative;
+  margin: 0 0 8px;
+  font-size: var(--type-title-sm);
+  line-height: 1.32;
+}
+
+.highlight-card p:last-child {
+  position: relative;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: var(--type-sm);
+  line-height: 1.58;
+}
+
+@media (max-width: 768px) {
+  .signal-card,
+  .highlight-card {
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .signal-card h2,
+  .highlight-card h2 {
+    font-size: 1.02rem;
+    margin-bottom: 6px;
+  }
+
+  .signal-card p:last-child,
+  .highlight-card p:last-child {
+    font-size: 0.84rem;
+    line-height: 1.56;
+  }
+
+  .highlight-label,
+  .signal-label {
+    margin-bottom: 8px;
+    letter-spacing: 0.11em;
+  }
+
+  .company-card {
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 18px;
+  }
+
+  .company-logo-badge {
+    width: 92px;
+    min-width: 92px;
+    height: 44px;
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  .company-card h3 {
+    font-size: 0.8rem;
+  }
+
+  .company-card p,
+  .company-card small,
+  .company-card span {
+    line-height: 1.45;
+  }
+}
+
+.company-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 13px 15px;
+  text-decoration: none;
+  color: inherit;
+  transition: border var(--transition-normal), background var(--transition-normal), transform var(--transition-fast), box-shadow var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.company-card > div:last-child {
+  transition: transform var(--transition-normal);
+}
+
+.company-logo-badge {
+  width: 104px;
+  min-width: 104px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  flex-shrink: 0;
+  transition: border-color var(--transition-normal), background var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.company-logo-badge.logo-surface-light {
+  background: linear-gradient(180deg, rgba(248, 250, 252, 0.98), rgba(226, 232, 240, 0.96));
+  border-color: rgba(148, 163, 184, 0.22);
+}
+
+.company-logo-badge.logo-surface-dark {
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.96));
+  border-color: rgba(148, 163, 184, 0.14);
+}
+
+.company-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(88, 166, 255, 0.05) 0%, rgba(88, 166, 255, 0.015) 28%, transparent 74%);
+  opacity: 0;
+  transform: scaleX(0.94);
+  transform-origin: left center;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+  pointer-events: none;
+}
+
+.company-card:hover {
+  border-color: rgba(125, 211, 252, 0.2);
+  background: linear-gradient(180deg, rgba(17, 26, 43, 0.98), rgba(10, 18, 31, 0.94));
+  transform: translateX(2px);
+  box-shadow: 0 14px 24px rgba(2, 6, 23, 0.14);
+}
+
+.company-card:hover::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.company-card:active {
+  transform: translateX(1px);
+}
+
+.company-card:hover > div:last-child {
+  transform: translateX(1px);
+}
+
+.company-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0.9;
+  transition: opacity var(--transition-normal), transform var(--transition-normal), filter var(--transition-normal);
+  flex-shrink: 0;
+}
+
+.company-card:hover img {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.company-card:hover .company-logo-badge {
+  border-color: rgba(148, 163, 184, 0.24);
+  transform: translateY(-1px);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 10px 18px rgba(2, 6, 23, 0.12);
+}
+
+.company-card h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--type-xs);
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.company-card:hover h3 {
+  color: rgba(237, 244, 251, 0.98);
+}
+
+.company-card p {
+  margin: 1px 0;
+  color: var(--muted);
+  font-size: 0.74rem;
+  transition: color var(--transition-fast);
+}
+
+.company-card:hover p {
+  color: var(--text);
+}
+
+.company-card span {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.company-card small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.68rem;
+}
+
+.company-card:hover span,
+.company-card:hover small {
+  color: rgba(203, 213, 225, 0.92);
+}
+
+@media (max-width: 480px) {
+  .signal-card,
+  .highlight-card {
+    padding: 16px 15px;
+    border-radius: 16px;
+  }
+
+  .signal-card h2,
+  .highlight-card h2 {
+    font-size: 0.98rem;
+    line-height: 1.28;
+  }
+
+  .signal-card p:last-child,
+  .highlight-card p:last-child {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .company-card {
+    gap: 10px;
+    padding: 11px 12px;
+    border-radius: 16px;
+  }
+
+  .company-logo-badge {
+    width: 82px;
+    min-width: 82px;
+    height: 40px;
+    padding: 7px 9px;
+    border-radius: 11px;
+  }
+
+  .company-card h3 {
+    font-size: 0.75rem;
+  }
+
+  .company-card p {
+    font-size: 0.72rem;
+  }
+
+  .company-card small,
+  .company-card span {
+    font-size: 0.68rem;
+  }
+}
+
+/* Coming Soon Card */
+.coming-soon-card {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background: linear-gradient(180deg, rgba(17, 26, 43, 0.94), rgba(9, 17, 31, 0.9));
+  border: 1px dashed rgba(147, 165, 188, 0.32);
+  text-align: center;
+  padding: var(--spacing-xl);
+  border-radius: 24px;
+}
+
+.coming-soon-card:hover {
+  transform: none;
+  border-color: var(--border);
+  background: var(--bg-secondary);
+}
+
+.coming-soon-card svg {
+  color: var(--muted);
+  opacity: 0.5;
+  margin-bottom: var(--spacing-lg);
+}
+
+.coming-soon-card h1 {
+  margin: 0 0 var(--spacing-lg) 0;
+  color: var(--text);
+  font-size: 1.35rem;
+}
+
+.coming-soon-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--type-body);
+  line-height: 1.6;
+}
+  margin-top: 3px;
+  font-size: 0.71rem;
+  color: var(--muted);
+}
+
+.company-card small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.74rem;
+}
+
+.company-card:hover span,
+.company-card:hover small {
+  color: rgba(203, 213, 225, 0.92);
+}
+
+@media (max-width: 768px) {
+  .company-card {
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 18px;
+  }
+
+  .company-logo-badge {
+    width: 92px;
+    min-width: 92px;
+    height: 44px;
+    padding: 8px 10px;
+    border-radius: 12px;
+  }
+
+  .company-card h3 {
+    font-size: 0.8rem;
+  }
+
+  .company-card p,
+  .company-card small,
+  .company-card span {
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 480px) {
+  .signal-card,
+  .highlight-card {
+    padding: 16px 15px;
+    border-radius: 16px;
+  }
+
+  .signal-card h2,
+  .highlight-card h2 {
+    font-size: 1rem;
+    line-height: 1.28;
+  }
+
+  .signal-card p:last-child,
+  .highlight-card p:last-child {
+    font-size: 0.82rem;
+    line-height: 1.52;
+  }
+
+  .company-card {
+    gap: 10px;
+    padding: 11px 12px;
+    border-radius: 16px;
+  }
+
+  .company-logo-badge {
+    width: 82px;
+    min-width: 82px;
+    height: 40px;
+    padding: 7px 9px;
+    border-radius: 11px;
+  }
+
+  .company-card h3 {
+    font-size: 0.76rem;
+  }
+
+  .company-card p {
+    font-size: 0.73rem;
+  }
+
+  .company-card small,
+  .company-card span {
+    font-size: 0.69rem;
+  }
+}
+
+/* Coming Soon Card */
+.coming-soon-card {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background: linear-gradient(180deg, rgba(17, 26, 43, 0.94), rgba(9, 17, 31, 0.9));
+  border: 1px dashed rgba(147, 165, 188, 0.32);
+  text-align: center;
+  padding: var(--spacing-xl);
+  border-radius: 24px;
+}
+
+.coming-soon-card:hover {
+  transform: none;
+  border-color: var(--border);
+  background: var(--bg-secondary);
+}
+
+.coming-soon-card svg {
+  color: var(--muted);
+  opacity: 0.5;
+  margin-bottom: var(--spacing-lg);
+}
+
+.coming-soon-card h1 {
+  margin: 0 0 var(--spacing-lg) 0;
+  color: var(--text);
+  font-size: 1.5rem;
+}
+
+.coming-soon-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}

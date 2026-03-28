@@ -1,0 +1,62 @@
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="640" height="360" rx="28" fill="url(#paint0_radial_211_6)"/>
+  <g opacity="0.62">
+    <rect x="54" y="54" width="98" height="56" rx="18" fill="#1D334B"/>
+    <rect x="170" y="66" width="76" height="42" rx="15" fill="#213A55"/>
+    <rect x="460" y="56" width="120" height="56" rx="18" fill="#1B3147"/>
+    <rect x="92" y="236" width="88" height="44" rx="16" fill="#193047"/>
+    <rect x="438" y="246" width="104" height="48" rx="16" fill="#203A54"/>
+  </g>
+  <g opacity="0.94">
+    <path d="M56 272C116 238 153 233 203 240C242 245 275 260 330 252C391 243 427 206 489 209C530 211 564 224 603 249" stroke="#36597D" stroke-width="26" stroke-linecap="round"/>
+    <path d="M84 119C133 132 165 161 222 168C287 176 333 145 393 152C457 160 491 203 560 214" stroke="#2F4F71" stroke-width="18" stroke-linecap="round"/>
+    <path d="M170 55C207 85 241 121 300 130C364 141 414 110 470 118C513 124 548 144 586 171" stroke="#294767" stroke-width="14" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.96">
+    <path d="M64 79L173 143" stroke="#6C9BC4" stroke-width="4" stroke-linecap="round"/>
+    <path d="M124 40L218 94" stroke="#5E8AB3" stroke-width="3" stroke-linecap="round"/>
+    <path d="M214 84L319 147" stroke="#6B99C0" stroke-width="4" stroke-linecap="round"/>
+    <path d="M280 56L385 117" stroke="#7AA9CF" stroke-width="3" stroke-linecap="round"/>
+    <path d="M360 64L456 121" stroke="#5D89AF" stroke-width="4" stroke-linecap="round"/>
+    <path d="M439 90L541 148" stroke="#78A8CD" stroke-width="3" stroke-linecap="round"/>
+    <path d="M153 160L233 205" stroke="#6B96BC" stroke-width="3" stroke-linecap="round"/>
+    <path d="M238 188L326 237" stroke="#83B0D4" stroke-width="4" stroke-linecap="round"/>
+    <path d="M326 221L418 273" stroke="#6D99C1" stroke-width="4" stroke-linecap="round"/>
+    <path d="M431 255L529 313" stroke="#7AA7CE" stroke-width="3" stroke-linecap="round"/>
+    <path d="M118 220L206 270" stroke="#5C89B0" stroke-width="3" stroke-linecap="round"/>
+    <path d="M241 148L278 295" stroke="#8EBCDE" stroke-width="4" stroke-linecap="round"/>
+    <path d="M335 137L366 302" stroke="#79A8CF" stroke-width="3" stroke-linecap="round"/>
+    <path d="M449 123L469 280" stroke="#6F9CC1" stroke-width="4" stroke-linecap="round"/>
+    <path d="M525 161L548 287" stroke="#7AA8CF" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <g opacity="0.96">
+    <circle cx="187" cy="140" r="4.5" fill="#A5E3FF"/>
+    <circle cx="244" cy="202" r="4.5" fill="#A5E3FF"/>
+    <circle cx="335" cy="146" r="4.5" fill="#A5E3FF"/>
+    <circle cx="365" cy="234" r="4.5" fill="#A5E3FF"/>
+    <circle cx="452" cy="121" r="4.5" fill="#A5E3FF"/>
+    <circle cx="470" cy="261" r="4.5" fill="#A5E3FF"/>
+  </g>
+  <g>
+    <circle cx="337" cy="178" r="54" fill="#7DD3FC" fill-opacity="0.12"/>
+    <circle cx="337" cy="178" r="32" fill="#7DD3FC" fill-opacity="0.17"/>
+    <path d="M337 143C322.364 143 310.5 154.864 310.5 169.5C310.5 190.125 337 221 337 221C337 221 363.5 190.125 363.5 169.5C363.5 154.864 351.636 143 337 143Z" fill="url(#paint1_linear_211_6)"/>
+    <circle cx="337" cy="170" r="8" fill="#102033" fill-opacity="0.88"/>
+  </g>
+  <g>
+    <rect x="377" y="142" width="146" height="52" rx="14" fill="#13263B" fill-opacity="0.9" stroke="#5F8CB4"/>
+    <text x="397" y="163" fill="#9EE4FF" font-family="IBM Plex Mono, monospace" font-size="12" letter-spacing="2.2">EINDHOVEN</text>
+    <text x="397" y="183" fill="#F3F8FC" font-family="Manrope, sans-serif" font-size="18" font-weight="700">51.4416, 5.4697</text>
+  </g>
+  <defs>
+    <radialGradient id="paint0_radial_211_6" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(332 26) rotate(90) scale(358 574.222)">
+      <stop stop-color="#17304A"/>
+      <stop offset="0.5" stop-color="#13263C"/>
+      <stop offset="1" stop-color="#0E192A"/>
+    </radialGradient>
+    <linearGradient id="paint1_linear_211_6" x1="323" y1="149" x2="356" y2="211" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7DD3FC"/>
+      <stop offset="1" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+</svg>

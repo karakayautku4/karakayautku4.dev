@@ -1,0 +1,1067 @@
+/**
+ * 5. Sidebar & Navigation Components
+ * Main sidebar, secondary sidebar, and navigation styles
+ */
+
+/* Sidebar Navigation */
+.site-header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 184px;
+  height: 100vh;
+  z-index: var(--z-header);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 10px 18px;
+  border-right: none;
+  background: transparent;
+  overflow: visible;
+  backdrop-filter: none;
+  box-shadow: none;
+}
+
+.site-header::before {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    z-index: calc(var(--z-header) + 1);
+  }
+}
+
+/* Profile Section */
+.profile-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 13px;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 18px 15px 15px;
+    padding: 12px 15px 14px;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 18% 14%, rgba(125, 211, 252, 0.14), transparent 30%),
+    linear-gradient(180deg, rgba(20, 31, 49, 0.97), rgba(9, 17, 31, 0.94));
+  box-shadow: 0 16px 34px rgba(2, 6, 23, 0.2);
+}
+
+.profile-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.profile-photo {
+  width: 62px;
+  height: 62px;
+  padding: 3px;
+  border-radius: 20px;
+  object-fit: cover;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(125, 211, 252, 0.08));
+  border: 1px solid rgba(125, 211, 252, 0.12);
+    align-items: center;
+  box-shadow: 0 14px 26px rgba(56, 189, 248, 0.1);
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.brand {
+  font-weight: 800;
+    border-radius: 14px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  transition: opacity var(--transition-normal);
+  display: block;
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.brand:hover {
+  opacity: 0.85;
+}
+
+.profile-title {
+  font-family: var(--font-family-mono);
+  font-size: 0.63rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(203, 213, 225, 0.7);
+  margin: 0;
+  font-weight: 500;
+  line-height: 1.45;
+    display: block;
+}
+
+.profile-meta {
+    overflow: visible;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 2px 0 0;
+  font-size: 0.68rem;
+  color: rgba(226, 232, 240, 0.72);
+  line-height: 1.35;
+}
+
+.profile-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(125, 211, 252, 0.95), rgba(245, 158, 11, 0.9));
+  box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.08);
+  flex-shrink: 0;
+}
+
+.nav-panel {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  margin-top: 0;
+  width: auto;
+  max-width: min(860px, calc(100vw - 48px));
+  padding: 13px 16px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 24px;
+  overflow: visible;
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.05) 18%, rgba(36, 36, 36, 0.24) 18%, rgba(18, 18, 18, 0.32)),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.04), transparent 42%, rgba(255, 255, 255, 0.02));
+  box-shadow:
+    0 18px 30px rgba(0, 0, 0, 0.24),
+    0 28px 56px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(30px) saturate(140%);
+  z-index: calc(var(--z-header) + 2);
+}
+
+.nav-panel::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 23px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.03) 16%, transparent 42%, rgba(255, 255, 255, 0.015));
+  pointer-events: none;
+}
+
+.nav-panel::after {
+  content: '';
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: -12px;
+  height: 16px;
+  border-radius: 999px;
+  background: radial-gradient(circle at center, rgba(0, 0, 0, 0.3), transparent 74%);
+  filter: blur(12px);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+.nav-panel .nav::before {
+  content: '';
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  top: 5px;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0));
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+.nav-panel .nav::after {
+  content: '';
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: -6px;
+  height: 14px;
+  border-radius: 999px;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05), transparent 72%);
+  filter: blur(10px);
+  opacity: 0.32;
+  pointer-events: none;
+}
+
+/* Navigation */
+.nav {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav a,
+.social-links a {
+  position: relative;
+  --dock-scale: 1;
+  --dock-rise: 0px;
+  --dock-accent-rgb: 148, 163, 184;
+  --dock-icon-color: rgb(214, 222, 236);
+  color: var(--muted);
+  text-decoration: none;
+  padding: 11px 9px;
+  border-radius: 14px;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 180ms ease,
+    color var(--transition-normal),
+    background var(--transition-normal),
+    border-color var(--transition-normal),
+    box-shadow var(--transition-normal);
+  font-size: var(--type-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  border: 1px solid transparent;
+  background: transparent;
+  backdrop-filter: none;
+  transform: translate3d(0, calc(var(--dock-rise) * -1), 0) scale(var(--dock-scale));
+  transform-origin: center bottom;
+  will-change: transform;
+  overflow: visible;
+  line-height: 0;
+  opacity: var(--dock-opacity, 1);
+}
+
+.nav a::before,
+.social-links a::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(7, 10, 16, 0.96);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 8px rgba(2, 6, 23, 0.34);
+  transform: translateX(-50%) scale(0.4);
+  opacity: 0;
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.dock-tooltip {
+  display: none;
+}
+
+.dock-separator {
+  width: 1px;
+  height: 30px;
+  margin: 0 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.06));
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 0 18px rgba(148, 163, 184, 0.08);
+  align-self: center;
+  flex: 0 0 auto;
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.nav a::after,
+.social-links a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(125, 211, 252, 0.06), transparent 42%, rgba(245, 158, 11, 0.04));
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+  pointer-events: none;
+}
+
+.nav a:hover,
+.social-links a:hover {
+  color: var(--text);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(var(--dock-accent-rgb), 0.09));
+  border-color: rgba(var(--dock-accent-rgb), 0.16);
+  box-shadow: none;
+}
+
+.nav a:hover::after,
+.social-links a:hover::after,
+.nav a:focus-visible::after,
+.social-links a:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.nav a[aria-current="page"] {
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.16), transparent 42%),
+    linear-gradient(180deg, rgba(var(--dock-accent-rgb), 0.28), rgba(255, 255, 255, 0.08));
+  border-color: rgba(var(--dock-accent-rgb), 0.24);
+  font-weight: 600;
+  padding-left: 10px;
+  box-shadow: none;
+}
+
+.nav a[data-window-open],
+.social-links a[data-window-open] {
+  color: rgba(237, 244, 251, 0.94);
+}
+
+.nav a[data-window-open]::before,
+.social-links a[data-window-open]::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(0.82);
+  background: rgba(var(--dock-accent-rgb), 0.9);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 16px rgba(var(--dock-accent-rgb), 0.26);
+}
+
+.nav a[data-window-active],
+.social-links a[data-window-active] {
+  color: var(--text);
+  background:
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.18), transparent 42%),
+    linear-gradient(180deg, rgba(var(--dock-accent-rgb), 0.28), rgba(255, 255, 255, 0.08));
+  border-color: rgba(var(--dock-accent-rgb), 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 24px rgba(2, 6, 23, 0.18);
+}
+
+.nav a[data-window-active]::before,
+.social-links a[data-window-active]::before {
+  transform: translateX(-50%) scale(1);
+}
+
+.nav a[data-window-active]::after,
+.social-links a[data-window-active]::after {
+  opacity: 0.72;
+  transform: translateX(0);
+}
+
+.nav a[aria-current="page"]::before,
+.social-links a[aria-current="page"]::before {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.nav a[aria-current="page"]::after {
+  opacity: 0.72;
+  transform: translateX(0);
+}
+
+.nav a svg,
+.social-links a > svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+  flex-shrink: 0;
+  color: var(--dock-icon-color);
+  filter: none;
+  overflow: visible;
+}
+
+.nav a:active,
+.social-links a:active {
+  transform: translate3d(0, calc((var(--dock-rise) - 2px) * -1), 0) scale(calc(var(--dock-scale) * 0.96));
+}
+
+.nav a.is-dock-bouncing,
+.social-links a.is-dock-bouncing {
+  animation: dock-bounce 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes dock-bounce {
+  0% {
+    transform: translate3d(0, calc(var(--dock-rise) * -1), 0) scale(var(--dock-scale));
+  }
+  32% {
+    transform: translate3d(0, calc((var(--dock-rise) + 14px) * -1), 0) scale(calc(var(--dock-scale) * 1.04));
+  }
+  64% {
+    transform: translate3d(0, calc((var(--dock-rise) + 5px) * -1), 0) scale(calc(var(--dock-scale) * 0.985));
+  }
+  100% {
+    transform: translate3d(0, calc(var(--dock-rise) * -1), 0) scale(var(--dock-scale));
+  }
+}
+
+@media (min-width: 769px) {
+  .nav-panel .nav .dock-tooltip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 50%;
+    bottom: calc(100% + 10px);
+    transform: translateX(-50%) translateY(6px) scale(0.96);
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(20, 31, 49, 0.96), rgba(9, 17, 31, 0.94));
+    border: 1px solid rgba(147, 165, 188, 0.16);
+    box-shadow: 0 14px 28px rgba(2, 6, 23, 0.24);
+    color: rgba(237, 244, 251, 0.92);
+    font-family: var(--font-family-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 160ms ease, transform 180ms cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 3;
+  }
+
+  .nav-panel .nav:has(a:hover) a:hover,
+  .nav-panel .nav:has(a:hover) a:focus-visible {
+    opacity: 1;
+    border-color: rgba(var(--dock-accent-rgb), 0.2);
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.14), transparent 46%),
+      linear-gradient(180deg, rgba(var(--dock-accent-rgb), 0.2), rgba(255, 255, 255, 0.06));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 16px 32px rgba(2, 6, 23, 0.18);
+    z-index: 2;
+  }
+
+  .nav-panel .nav:has(a:hover) a:hover .dock-tooltip,
+  .nav-panel .nav:has(a:hover) a:focus-visible .dock-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+
+  .nav-panel .nav:has(a[aria-current="page"]:hover) a[aria-current="page"] {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav a,
+  .social-links a,
+  .nav-panel .nav .dock-tooltip {
+    transition: none;
+  }
+
+  .nav a.is-dock-bouncing,
+  .social-links a.is-dock-bouncing {
+    animation: none;
+  }
+}
+
+.nav-panel a[data-dock-icon="home"] {
+  --dock-accent-rgb: 96, 165, 250;
+  --dock-icon-color: rgb(143, 197, 255);
+}
+
+.nav-panel a[data-dock-icon="about"] {
+  --dock-accent-rgb: 56, 189, 248;
+  --dock-icon-color: rgb(103, 232, 249);
+}
+
+.nav-panel a[data-dock-icon="projects"] {
+  --dock-accent-rgb: 251, 191, 36;
+  --dock-icon-color: rgb(252, 211, 77);
+}
+
+.nav-panel a[data-dock-icon="hobbies"] {
+  --dock-accent-rgb: 244, 114, 182;
+  --dock-icon-color: rgb(251, 182, 206);
+}
+
+.nav-panel a[data-dock-icon="bookmarks"] {
+  --dock-accent-rgb: 250, 204, 21;
+  --dock-icon-color: rgb(253, 224, 71);
+}
+
+.nav-panel a[data-dock-icon="github"] {
+  --dock-accent-rgb: 226, 232, 240;
+  --dock-icon-color: rgb(248, 250, 252);
+}
+
+.nav-panel a[data-dock-icon="tryhackme"] {
+  --dock-accent-rgb: 34, 197, 94;
+  --dock-icon-color: rgb(220, 252, 231);
+}
+
+.nav-panel a[data-dock-icon="hackerrank"] {
+  --dock-accent-rgb: 16, 185, 129;
+  --dock-icon-color: rgb(209, 250, 229);
+}
+
+.nav-panel a[data-dock-icon="linkedin"] {
+  --dock-accent-rgb: 59, 130, 246;
+  --dock-icon-color: rgb(96, 165, 250);
+}
+
+.nav-panel a[data-dock-icon="x"] {
+  --dock-accent-rgb: 226, 232, 240;
+  --dock-icon-color: rgb(248, 250, 252);
+}
+
+.nav-panel a[data-dock-icon="instagram"] {
+  --dock-accent-rgb: 244, 114, 182;
+  --dock-icon-color: rgb(249, 168, 212);
+}
+
+.nav-panel a[data-dock-icon="reddit"] {
+  --dock-accent-rgb: 249, 115, 22;
+  --dock-icon-color: rgb(251, 146, 60);
+}
+
+.nav-panel a[data-dock-icon="home"],
+.nav-panel a[data-dock-icon="about"],
+.nav-panel a[data-dock-icon="projects"],
+.nav-panel a[data-dock-icon="hobbies"],
+.nav-panel a[data-dock-icon="bookmarks"],
+.nav-panel a[data-dock-icon="github"],
+.nav-panel a[data-dock-icon="tryhackme"],
+.nav-panel a[data-dock-icon="hackerrank"],
+.nav-panel a[data-dock-icon="linkedin"],
+.nav-panel a[data-dock-icon="x"],
+.nav-panel a[data-dock-icon="instagram"],
+.nav-panel a[data-dock-icon="reddit"] {
+  --social-tile-border: rgba(255, 255, 255, 0.08);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.nav-panel a[data-dock-icon="home"] > svg,
+.nav-panel a[data-dock-icon="about"] > svg,
+.nav-panel a[data-dock-icon="projects"] > svg,
+.nav-panel a[data-dock-icon="hobbies"] > svg,
+.nav-panel a[data-dock-icon="bookmarks"] > svg,
+.nav-panel a[data-dock-icon="github"] > svg,
+.nav-panel a[data-dock-icon="tryhackme"] > svg,
+.nav-panel a[data-dock-icon="hackerrank"] > svg,
+.nav-panel a[data-dock-icon="linkedin"] > svg,
+.nav-panel a[data-dock-icon="x"] > svg,
+.nav-panel a[data-dock-icon="instagram"] > svg,
+.nav-panel a[data-dock-icon="reddit"] > svg {
+  width: 18px;
+  height: 18px;
+  padding: 6px;
+  border-radius: 9px;
+  box-sizing: content-box;
+  border: 1px solid var(--social-tile-border);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 28%),
+    linear-gradient(180deg, rgba(25, 32, 44, 0.92), rgba(8, 12, 18, 0.94));
+  box-shadow: none;
+  transition:
+    transform 220ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 220ms ease,
+    filter 220ms ease,
+    border-color 220ms ease;
+  transform-origin: center;
+}
+
+.nav-panel a[data-dock-icon="github"] > svg {
+  width: 18px;
+  height: 18px;
+  padding: 4px;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+}
+
+.nav-panel a[data-dock-icon="tryhackme"] > svg {
+  width: 18px;
+  height: 18px;
+  padding: 4px;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+}
+
+.nav-panel a[data-dock-icon="hackerrank"] > svg {
+  width: 16px;
+  height: 16px;
+  padding: 6px;
+  border-radius: 10px;
+  color: rgb(255, 255, 255);
+}
+
+.nav-panel a[data-dock-icon="linkedin"] > svg,
+.nav-panel a[data-dock-icon="x"] > svg,
+.nav-panel a[data-dock-icon="instagram"] > svg,
+.nav-panel a[data-dock-icon="reddit"] > svg {
+  border-radius: 10px;
+}
+
+.nav-panel a[data-dock-icon="linkedin"] > svg {
+  color: rgb(255, 255, 255);
+}
+
+.nav-panel a[data-dock-icon="x"] > svg {
+  color: rgb(255, 255, 255);
+}
+
+.nav-panel a[data-dock-icon="instagram"] > svg {
+  color: rgb(255, 255, 255);
+}
+
+.nav-panel a[data-dock-icon="reddit"] > svg {
+  color: rgb(255, 255, 255);
+}
+
+.nav-panel a[data-dock-icon="home"]:hover,
+.nav-panel a[data-dock-icon="about"]:hover,
+.nav-panel a[data-dock-icon="projects"]:hover,
+.nav-panel a[data-dock-icon="hobbies"]:hover,
+.nav-panel a[data-dock-icon="bookmarks"]:hover,
+.nav-panel a[data-dock-icon="github"]:hover,
+.nav-panel a[data-dock-icon="tryhackme"]:hover,
+.nav-panel a[data-dock-icon="hackerrank"]:hover,
+.nav-panel a[data-dock-icon="linkedin"]:hover,
+.nav-panel a[data-dock-icon="x"]:hover,
+.nav-panel a[data-dock-icon="instagram"]:hover,
+.nav-panel a[data-dock-icon="reddit"]:hover,
+.nav-panel a[data-dock-icon="home"]:focus-visible,
+.nav-panel a[data-dock-icon="about"]:focus-visible,
+.nav-panel a[data-dock-icon="projects"]:focus-visible,
+.nav-panel a[data-dock-icon="hobbies"]:focus-visible,
+.nav-panel a[data-dock-icon="bookmarks"]:focus-visible,
+.nav-panel a[data-dock-icon="github"]:focus-visible,
+.nav-panel a[data-dock-icon="tryhackme"]:focus-visible,
+.nav-panel a[data-dock-icon="hackerrank"]:focus-visible,
+.nav-panel a[data-dock-icon="linkedin"]:focus-visible,
+.nav-panel a[data-dock-icon="x"]:focus-visible,
+.nav-panel a[data-dock-icon="instagram"]:focus-visible,
+.nav-panel a[data-dock-icon="reddit"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="home"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="about"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="projects"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hobbies"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="bookmarks"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="github"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="tryhackme"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hackerrank"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="linkedin"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="x"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="instagram"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="reddit"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="home"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="about"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="projects"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hobbies"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="bookmarks"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="github"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="tryhackme"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hackerrank"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="linkedin"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="x"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="instagram"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="reddit"]:focus-visible {
+  --social-tile-border: rgba(var(--dock-accent-rgb), 0.34);
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.nav-panel a[data-dock-icon="home"]::after,
+.nav-panel a[data-dock-icon="about"]::after,
+.nav-panel a[data-dock-icon="projects"]::after,
+.nav-panel a[data-dock-icon="hobbies"]::after,
+.nav-panel a[data-dock-icon="bookmarks"]::after,
+.social-links a[data-dock-icon="github"]::after,
+.social-links a[data-dock-icon="tryhackme"]::after,
+.social-links a[data-dock-icon="hackerrank"]::after,
+.social-links a[data-dock-icon="linkedin"]::after,
+.social-links a[data-dock-icon="x"]::after,
+.social-links a[data-dock-icon="instagram"]::after,
+.social-links a[data-dock-icon="reddit"]::after,
+.nav-panel a[data-dock-icon="home"]:hover::after,
+.nav-panel a[data-dock-icon="about"]:hover::after,
+.nav-panel a[data-dock-icon="projects"]:hover::after,
+.nav-panel a[data-dock-icon="hobbies"]:hover::after,
+.nav-panel a[data-dock-icon="bookmarks"]:hover::after,
+.social-links a[data-dock-icon="github"]:hover::after,
+.social-links a[data-dock-icon="tryhackme"]:hover::after,
+.social-links a[data-dock-icon="hackerrank"]:hover::after,
+.social-links a[data-dock-icon="linkedin"]:hover::after,
+.social-links a[data-dock-icon="x"]:hover::after,
+.social-links a[data-dock-icon="instagram"]:hover::after,
+.social-links a[data-dock-icon="reddit"]:hover::after,
+.nav-panel a[data-dock-icon="home"]:focus-visible::after,
+.nav-panel a[data-dock-icon="about"]:focus-visible::after,
+.nav-panel a[data-dock-icon="projects"]:focus-visible::after,
+.nav-panel a[data-dock-icon="hobbies"]:focus-visible::after,
+.nav-panel a[data-dock-icon="bookmarks"]:focus-visible::after,
+.social-links a[data-dock-icon="github"]:focus-visible::after,
+.social-links a[data-dock-icon="tryhackme"]:focus-visible::after,
+.social-links a[data-dock-icon="hackerrank"]:focus-visible::after,
+.social-links a[data-dock-icon="linkedin"]:focus-visible::after,
+.social-links a[data-dock-icon="x"]:focus-visible::after,
+.social-links a[data-dock-icon="instagram"]:focus-visible::after,
+.social-links a[data-dock-icon="reddit"]:focus-visible::after {
+  opacity: 0;
+}
+
+.nav-panel .nav:has(a:hover) a[data-dock-icon="home"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="about"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="projects"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hobbies"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="bookmarks"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="github"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="tryhackme"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hackerrank"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="linkedin"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="x"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="instagram"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="reddit"]:hover,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="home"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="about"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="projects"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hobbies"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="bookmarks"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="github"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="tryhackme"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hackerrank"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="linkedin"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="x"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="instagram"]:focus-visible,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="reddit"]:focus-visible {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.nav-panel .nav:has(a:hover) a[data-dock-icon="home"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="about"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="projects"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hobbies"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="bookmarks"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="home"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="about"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="projects"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hobbies"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="bookmarks"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="github"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="tryhackme"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hackerrank"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="linkedin"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="x"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="instagram"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="reddit"]:hover > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="github"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="tryhackme"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="hackerrank"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="linkedin"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="x"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="instagram"]:focus-visible > svg,
+.nav-panel .nav:has(a:hover) a[data-dock-icon="reddit"]:focus-visible > svg {
+  transform: translateY(-2px) scale(1.06);
+  box-shadow: none;
+  filter: none;
+}
+
+.nav-panel a[data-dock-icon="home"]:hover > svg,
+.nav-panel a[data-dock-icon="about"]:hover > svg,
+.nav-panel a[data-dock-icon="projects"]:hover > svg,
+.nav-panel a[data-dock-icon="hobbies"]:hover > svg,
+.nav-panel a[data-dock-icon="bookmarks"]:hover > svg,
+.nav-panel a[data-dock-icon="home"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="about"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="projects"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="hobbies"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="bookmarks"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="github"]:hover > svg,
+.nav-panel a[data-dock-icon="tryhackme"]:hover > svg,
+.nav-panel a[data-dock-icon="hackerrank"]:hover > svg,
+.nav-panel a[data-dock-icon="github"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="tryhackme"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="hackerrank"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="linkedin"]:hover > svg,
+.nav-panel a[data-dock-icon="x"]:hover > svg,
+.nav-panel a[data-dock-icon="instagram"]:hover > svg,
+.nav-panel a[data-dock-icon="reddit"]:hover > svg,
+.nav-panel a[data-dock-icon="linkedin"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="x"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="instagram"]:focus-visible > svg,
+.nav-panel a[data-dock-icon="reddit"]:focus-visible > svg {
+  border-color: var(--social-tile-border);
+}
+
+.nav-panel a[data-dock-icon="home"][aria-current="page"],
+.nav-panel a[data-dock-icon="about"][aria-current="page"],
+.nav-panel a[data-dock-icon="projects"][aria-current="page"],
+.nav-panel a[data-dock-icon="hobbies"][aria-current="page"],
+.nav-panel a[data-dock-icon="bookmarks"][aria-current="page"] {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.nav-panel a[data-dock-icon="home"][aria-current="page"] > svg,
+.nav-panel a[data-dock-icon="about"][aria-current="page"] > svg,
+.nav-panel a[data-dock-icon="projects"][aria-current="page"] > svg,
+.nav-panel a[data-dock-icon="hobbies"][aria-current="page"] > svg,
+.nav-panel a[data-dock-icon="bookmarks"][aria-current="page"] > svg {
+  border-color: rgba(var(--dock-accent-rgb), 0.34);
+  box-shadow: none;
+}
+
+.nav a span,
+.social-links a span {
+  min-width: 0;
+}
+
+.sidebar-title {
+  display: none;
+}
+
+.social-links {
+  display: contents;
+}
+
+.social-links a {
+  color: rgba(203, 213, 225, 0.82);
+}
+
+.nav a.icon-only-link,
+.social-links a.icon-only-link {
+  justify-content: center;
+  padding-left: 7px;
+  padding-right: 7px;
+  width: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 15px;
+}
+
+.social-links svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.external-indicator {
+  margin-left: auto;
+  opacity: 0.45;
+}
+
+.external-indicator svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.4;
+}
+
+.social-links a:hover .external-indicator svg {
+  opacity: 0.7;
+}
+
+.social-links span {
+  margin-right: 0;
+}
+
+.site-header::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+}
+
+.site-header::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+  box-shadow:
+    inset 0 1px 0 var(--scrollbar-thumb-border),
+    0 6px 18px rgba(2, 6, 23, 0.18);
+}
+
+/* Secondary Sidebar */
+.secondary-sidebar {
+  position: fixed;
+  top: 40px;
+  left: 208px;
+  width: 200px;
+  max-height: calc(100vh - 80px);
+  background: linear-gradient(180deg, rgba(17, 26, 43, 0.96), rgba(9, 17, 31, 0.96));
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 28px 20px;
+  display: none;
+  flex-direction: column;
+  z-index: 10;
+  overflow-y: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(16px);
+}
+
+@media (max-width: 980px) {
+  .nav-panel {
+    max-width: calc(100vw - 40px);
+    padding: 9px 12px;
+  }
+
+  .nav {
+    gap: 7px;
+  }
+
+  .nav a.icon-only-link,
+  .social-links a.icon-only-link {
+    width: 36px;
+    min-width: 36px;
+    min-height: 36px;
+  }
+}
+
+.secondary-sidebar.active {
+  display: flex;
+}
+
+@media (max-width: 1200px) {
+  .secondary-sidebar {
+    display: none !important;
+  }
+}
+
+.secondary-sidebar h3 {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin: var(--spacing-xl) 0 var(--spacing-sm);
+  padding-bottom: var(--spacing-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.secondary-sidebar h3:first-child {
+  margin-top: 0;
+}
+
+.category-with-icon {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.86);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(148, 163, 184, 0.06));
+  border: 1px solid rgba(147, 165, 188, 0.14);
+  border-radius: 10px;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: border-color var(--transition-normal), background var(--transition-normal), color var(--transition-normal);
+}
+
+.count-badge:hover {
+  color: rgba(237, 244, 251, 0.94);
+  border-color: rgba(147, 165, 188, 0.2);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(148, 163, 184, 0.08));
+}
+
+.secondary-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.secondary-sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 6px 12px;
+  color: var(--muted);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.secondary-sidebar-nav a:hover {
+  color: var(--text);
+  background: var(--bg-secondary);
+}
+
+/* Mobile Secondary Menu */
+.mobile-secondary-menu {
+  display: none;
+}
+
+.mobile-secondary-section {
+  margin-bottom: var(--spacing-md);
+}
+
+.mobile-secondary-heading {
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--muted);
+  margin: var(--spacing-sm) 0 var(--spacing-xs);
+  padding: 0 var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+}
+
+.mobile-secondary-heading .count-badge {
+  flex-shrink: 0;
+}
+
+.mobile-secondary-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mobile-secondary-links a {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-normal);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.mobile-secondary-links a:hover {
+  color: var(--text);
+  background: var(--bg-secondary);
+}
