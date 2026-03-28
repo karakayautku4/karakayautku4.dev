@@ -784,7 +784,7 @@ export class DesktopRuntime {
     return `${hours}h ago`;
   }
 
-  openWindow(appId) {
+  openWindow(appId, options = {}) {
     if (appId === 'home') {
       this.revealDesktop();
       return;
@@ -803,7 +803,7 @@ export class DesktopRuntime {
       return;
     }
 
-    const windowNode = this.createWindow(appId, config);
+    const windowNode = this.createWindow(appId, config, options);
     this.windows.set(appId, windowNode);
     this.windowsArea.appendChild(windowNode);
     this.applyStoredWindowFrame(windowNode, appId, config);
@@ -812,18 +812,27 @@ export class DesktopRuntime {
     this.syncDockState();
   }
 
-  createWindow(appId, config) {
+  createWindow(appId, config, options = {}) {
     const windowNode = document.createElement('article');
     windowNode.className = 'desktop-app-window';
     windowNode.dataset.appId = appId;
-    windowNode.style.width = `${config.width}px`;
-    windowNode.style.height = `${config.height}px`;
+    const centeredFrame = options.initialPlacement === 'center'
+      ? this.getCenteredWindowFrame(config)
+      : null;
 
-    const offsetX = 40 + (this.windowOffset % 5) * 28;
-    const offsetY = 36 + (this.windowOffset % 5) * 22;
-    this.windowOffset += 1;
-    windowNode.style.left = `${offsetX}px`;
-    windowNode.style.top = `${offsetY}px`;
+    windowNode.style.width = centeredFrame?.width || `${config.width}px`;
+    windowNode.style.height = centeredFrame?.height || `${config.height}px`;
+
+    if (centeredFrame) {
+      windowNode.style.left = centeredFrame.left;
+      windowNode.style.top = centeredFrame.top;
+    } else {
+      const offsetX = 40 + (this.windowOffset % 5) * 28;
+      const offsetY = 36 + (this.windowOffset % 5) * 22;
+      this.windowOffset += 1;
+      windowNode.style.left = `${offsetX}px`;
+      windowNode.style.top = `${offsetY}px`;
+    }
 
     windowNode.innerHTML = `
       <header class="desktop-app-titlebar" data-window-drag-handle>
@@ -1942,7 +1951,7 @@ export class DesktopRuntime {
 
     this.markFirstDesktopVisitComplete();
     window.requestAnimationFrame(() => {
-      this.openWindow('about');
+      this.openWindow('about', { initialPlacement: 'center' });
     });
   }
 
@@ -2023,6 +2032,27 @@ export class DesktopRuntime {
     return {
       left: `${Math.round(leftValue)}px`,
       top: `${Math.round(topValue)}px`,
+      width: `${Math.round(widthValue)}px`,
+      height: `${Math.round(heightValue)}px`
+    };
+  }
+
+  getCenteredWindowFrame(config) {
+    const stageRect = this.windowsArea?.getBoundingClientRect();
+    const stageWidth = stageRect?.width || window.innerWidth;
+    const stageHeight = stageRect?.height || (window.innerHeight - 90);
+    const widthValue = Math.min(
+      Math.max(520, config.width),
+      Math.max(520, stageWidth - 24)
+    );
+    const heightValue = Math.min(
+      Math.max(360, config.height),
+      Math.max(360, stageHeight - 24)
+    );
+
+    return {
+      left: `${Math.round(Math.max(18, (stageWidth - widthValue) / 2))}px`,
+      top: `${Math.round(Math.max(18, (stageHeight - heightValue) / 2))}px`,
       width: `${Math.round(widthValue)}px`,
       height: `${Math.round(heightValue)}px`
     };

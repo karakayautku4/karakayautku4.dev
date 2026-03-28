@@ -68,6 +68,9 @@ body.desktop-home-active .profile-section {
 body.desktop-home-active {
   margin-left: 0;
   padding-bottom: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow: hidden;
 }
 
 body.desktop-home-active .site-header {
@@ -76,11 +79,24 @@ body.desktop-home-active .site-header {
 
 body.desktop-home-active main {
   padding-left: 0;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+body.desktop-home-active #page-content {
+  height: 100%;
+  overflow: hidden;
 }
 
 .desktop-runtime {
   position: relative;
   min-height: calc(100vh - 28px);
+  min-height: calc(100dvh - 28px);
+  height: calc(100vh - 28px);
+  height: calc(100dvh - 28px);
+  display: flex;
+  flex-direction: column;
   border: 1px solid rgba(148, 163, 184, 0.12);
   border-radius: 32px;
   overflow: hidden;
@@ -248,7 +264,8 @@ body.desktop-home-active main {
 
 .desktop-stage {
   position: relative;
-  min-height: calc(100vh - 74px);
+  flex: 1;
+  min-height: 0;
   padding: 24px 24px 132px;
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.02) 22%, rgba(0, 0, 0, 0.22)),
