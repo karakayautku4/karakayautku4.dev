@@ -35,7 +35,7 @@ function renderNavLinks(items, currentPage, pathPrefix) {
   return items.map(item => {
     const isActive = currentPage === item.href;
     const className = item.iconOnly ? ' class="icon-only-link"' : '';
-    const label = item.iconOnly ? '' : `<span>${item.label}</span>`;
+    const label = `<span class="nav-link-label">${item.label}</span>`;
     const dockTooltip = item.iconOnly ? `<span class="dock-tooltip" aria-hidden="true">${item.label}</span>` : '';
     const dockIcon = item.iconOnly ? ` data-dock-icon="${item.icon}"` : '';
     return `
@@ -50,13 +50,13 @@ function renderNavLinks(items, currentPage, pathPrefix) {
 function renderExternalLinks(items) {
   return items.map(item => {
     const className = item.iconOnly ? ' class="icon-only-link"' : '';
-    const label = item.iconOnly ? '' : `<span>${item.label}</span>`;
+    const label = `<span class="nav-link-label">${item.label}</span>`;
     const dockTooltip = item.iconOnly ? `<span class="dock-tooltip" aria-hidden="true">${item.label}</span>` : '';
     const dockIcon = item.iconOnly ? ` data-dock-icon="${item.icon}"` : '';
     const desktopWindow = ['github', 'tryhackme', 'hackerrank', 'linkedin', 'x', 'instagram', 'reddit'].includes(item.icon)
       ? ` data-desktop-window="${item.icon}"`
       : '';
-    const externalIndicator = item.iconOnly ? '' : `<span class="external-indicator" aria-hidden="true">${createSVG('external', 12)}</span>`;
+    const externalIndicator = `<span class="external-indicator" aria-hidden="true">${createSVG('external', 12)}</span>`;
 
     return `
         <a href="${item.href}" target="_blank" rel="noopener noreferrer" aria-label="${item.label}"${dockIcon}${desktopWindow}${className}>

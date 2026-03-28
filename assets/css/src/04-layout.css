@@ -2330,6 +2330,7 @@ body.desktop-home-active #page-content {
   .container {
     padding: 92px 18px 32px;
     min-height: calc(100vh - 100px);
+    min-height: calc(100dvh - 100px);
   }
 
   .home-page .container {
@@ -2371,6 +2372,7 @@ body.desktop-home-active #page-content {
   .hero-actions,
   .page-actions {
     gap: 10px;
+    flex-direction: column;
   }
 
   .hero-actions-footer {
@@ -2426,6 +2428,7 @@ body.desktop-home-active #page-content {
   .container {
     padding: 84px 14px 26px;
     min-height: calc(100vh - 100px);
+    min-height: calc(100dvh - 100px);
   }
 
   .home-page .container {
@@ -2453,6 +2456,12 @@ body.desktop-home-active #page-content {
   .hero-actions,
   .page-actions {
     gap: 8px;
+  }
+
+  .hero-actions > a,
+  .page-actions > a {
+    width: 100%;
+    justify-content: center;
   }
 
   .hero-actions-footer {

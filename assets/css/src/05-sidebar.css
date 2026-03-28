@@ -854,6 +854,13 @@
   border-radius: 15px;
 }
 
+.nav a.icon-only-link .nav-link-label,
+.social-links a.icon-only-link .nav-link-label,
+.nav a.icon-only-link .external-indicator,
+.social-links a.icon-only-link .external-indicator {
+  display: none;
+}
+
 .social-links svg {
   display: block;
   width: 16px;

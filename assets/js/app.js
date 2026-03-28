@@ -25,6 +25,8 @@ import { renderPageTemplate } from './modules/page-content.js';
 
 import { initDesktopRuntime } from './modules/desktop-runtime.js';
 
+let responsiveHomeModeWatcherBound = false;
+
 function isEmbeddedMode() {
   return new URLSearchParams(window.location.search).get('embed') === '1';
 }
@@ -65,6 +67,25 @@ function renderPageBody(currentPage) {
 
   root.innerHTML = renderPageTemplate(currentPage);
   return root;
+}
+
+function bindResponsiveHomeMode(currentPage, embedded) {
+  if (responsiveHomeModeWatcherBound || currentPage !== 'index.html' || embedded) {
+    return;
+  }
+
+  const desktopModeQuery = window.matchMedia('(min-width: 861px)');
+  const handleModeChange = () => {
+    window.location.reload();
+  };
+
+  if (typeof desktopModeQuery.addEventListener === 'function') {
+    desktopModeQuery.addEventListener('change', handleModeChange);
+  } else if (typeof desktopModeQuery.addListener === 'function') {
+    desktopModeQuery.addListener(handleModeChange);
+  }
+
+  responsiveHomeModeWatcherBound = true;
 }
 
 const pageInitializers = {
@@ -115,6 +136,8 @@ function initPage() {
   if (initializer) {
     initializer();
   }
+
+  bindResponsiveHomeMode(currentPage, embedded);
 
   if (currentPage === 'index.html' && !embedded && desktopEligible) {
     document.body.classList.add('desktop-home-active');

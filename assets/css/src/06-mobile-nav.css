@@ -146,9 +146,9 @@
 
   .site-header {
     left: 12px;
-    top: 70px;
+    top: 72px;
     bottom: 12px;
-    width: min(320px, calc(100vw - 24px));
+    width: min(360px, calc(100vw - 24px));
     max-width: calc(100vw - 24px);
     height: auto;
     border-right: none;
@@ -255,6 +255,16 @@
     backdrop-filter: none;
   }
 
+  .nav {
+    gap: 0;
+  }
+
+  .dock-separator {
+    width: 100%;
+    height: 1px;
+    margin: 10px 0;
+  }
+
   .brand {
     font-size: 0.9rem;
   }
@@ -263,10 +273,30 @@
     font-size: 0.68rem;
   }
 
-  .nav a {
-    padding: 10px 11px;
+  .nav a,
+  .social-links a {
+    width: 100%;
+    min-height: 48px;
+    justify-content: flex-start;
+    padding: 11px 12px;
     font-size: 0.88rem;
-    border-radius: 14px;
+    line-height: 1.2;
+    border-radius: 16px;
+  }
+
+  .nav a::before,
+  .social-links a::before,
+  .dock-tooltip {
+    display: none;
+  }
+
+  .nav-link-label {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    font-size: 0.88rem;
+    font-weight: 600;
+    line-height: 1.2;
   }
 
   .nav {
@@ -289,10 +319,20 @@
 
   .nav a.icon-only-link,
   .social-links a.icon-only-link {
-    width: auto;
+    width: 100%;
     min-width: 0;
-    min-height: 0;
-    border-radius: 14px;
+    min-height: 48px;
+    justify-content: flex-start;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 16px;
+  }
+
+  .nav a.icon-only-link .nav-link-label,
+  .social-links a.icon-only-link .nav-link-label,
+  .nav a.icon-only-link .external-indicator,
+  .social-links a.icon-only-link .external-indicator {
+    display: inline-flex;
   }
 
   .sidebar-title {
@@ -301,9 +341,36 @@
     padding-top: 12px;
   }
 
-  .social-links a {
+  .external-indicator {
+    margin-left: auto;
+    opacity: 0.58;
+  }
+
+  .external-indicator svg {
+    opacity: 0.58;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+    max-width: none;
+    padding: 12px 12px 16px;
+    border-radius: 20px;
+  }
+
+  .nav a,
+  .social-links a,
+  .nav a.icon-only-link,
+  .social-links a.icon-only-link {
+    min-height: 46px;
     padding: 10px 11px;
-    font-size: 0.82rem;
-    border-radius: 14px;
+  }
+
+  .nav-link-label {
+    font-size: 0.84rem;
   }
 }
