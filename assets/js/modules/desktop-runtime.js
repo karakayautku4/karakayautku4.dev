@@ -77,6 +77,25 @@ const DESKTOP_APPS = {
       ]
     }
   },
+  message: {
+    title: 'Message Me',
+    icon: 'message',
+    kind: 'mailbox',
+    url: 'mailto:k4utku@gmail.com',
+    width: 760,
+    height: 560,
+    mailbox: {
+      address: 'k4utku@gmail.com',
+      kicker: 'Inbox Window',
+      description: 'A quick way to reach out directly from the desktop. Write a short subject and message, then open your mail client with everything filled in.',
+      availability: 'Best for collaboration, opportunities, project ideas, or a direct hello.',
+      placeholders: {
+        subject: 'Quick hello from karakayautku4.dev',
+        body: 'Hi Utku,%0A%0AI came across your site and wanted to reach out about...'
+      },
+      note: 'This site is static, so sending is handled by your own email app.'
+    }
+  },
   github: {
     title: 'GitHub',
     icon: 'github',
@@ -193,12 +212,14 @@ const DESKTOP_APPS = {
 
 const DESKTOP_SHORTCUTS = [
   { appId: 'cv', label: 'CV' },
-  { appId: 'photos', label: 'Photos' }
+  { appId: 'photos', label: 'Photos' },
+  { appId: 'message', label: 'Message' }
 ];
 
 const MENUBAR_ITEMS = {
   desktop: ['File', 'Edit', 'View', 'Go', 'Window'],
   about: ['Profile', 'History', 'Skills', 'Window'],
+  message: ['Inbox', 'Compose', 'Window'],
   photos: ['Library', 'View', 'Window'],
   projects: ['Projects', 'Status', 'Archive', 'Window'],
   hobbies: ['Collections', 'Notes', 'Window', 'Help'],
@@ -220,6 +241,11 @@ const MENUBAR_MENUS = {
     Profile: ['Open about window', 'Pin profile widget', 'Jump to home'],
     History: ['Career path', 'Experience notes', 'Recent updates'],
     Skills: ['Automation', 'Python', 'Security'],
+    Window: ['Minimize', 'Zoom', 'Close window']
+  },
+  message: {
+    Inbox: ['Open message window', 'Copy address', 'Open externally'],
+    Compose: ['Compose email'],
     Window: ['Minimize', 'Zoom', 'Close window']
   },
   photos: {
@@ -462,6 +488,18 @@ export class DesktopRuntime {
 
     if (entry === 'Open photos window') {
       return 'open-app:photos';
+    }
+
+    if (entry === 'Open message window') {
+      return 'open-app:message';
+    }
+
+    if (entry === 'Compose email') {
+      return 'compose-email:message';
+    }
+
+    if (entry === 'Copy address') {
+      return 'copy-email:message';
     }
 
     if (entry === 'Minimize') {
@@ -845,7 +883,7 @@ export class DesktopRuntime {
           <span class="desktop-app-title-icon">${createSVG(config.icon, 14)}</span>
           <span>${config.title}</span>
         </div>
-        <div class="desktop-app-title-meta">${config.kind === 'browser' ? 'Browser' : config.kind === 'document' ? 'Document' : config.kind === 'photos' ? 'Gallery' : config.kind === 'profile' || config.kind === 'github-profile' ? 'Profile' : 'App'}</div>
+        <div class="desktop-app-title-meta">${config.kind === 'browser' ? 'Browser' : config.kind === 'document' ? 'Document' : config.kind === 'photos' ? 'Gallery' : config.kind === 'mailbox' ? 'Inbox' : config.kind === 'profile' || config.kind === 'github-profile' ? 'Profile' : 'App'}</div>
       </header>
       <div class="desktop-app-content"></div>
       <button class="desktop-app-resize-handle" type="button" aria-label="Resize window"></button>
@@ -869,6 +907,11 @@ export class DesktopRuntime {
 
     if (config.kind === 'profile') {
       content.innerHTML = this.renderProfileAppContent(config);
+    }
+
+    if (config.kind === 'mailbox') {
+      content.innerHTML = this.renderMessageAppContent(config);
+      this.setupMessageWindow(content, config);
     }
 
     if (config.kind === 'photos') {
@@ -1050,6 +1093,51 @@ export class DesktopRuntime {
     `;
   }
 
+  renderMessageAppContent(config) {
+    const mailbox = config.mailbox;
+
+    return `
+      <div class="desktop-message-app" data-message-app>
+        <div class="desktop-message-hero">
+          <div>
+            <p class="desktop-window-kicker">${this.escapeHTML(mailbox.kicker)}</p>
+            <h3>${this.escapeHTML(config.title)}</h3>
+            <p class="desktop-message-description">${this.escapeHTML(mailbox.description)}</p>
+            <div class="desktop-message-meta">
+              <span>${this.escapeHTML(mailbox.address)}</span>
+              <span>${this.escapeHTML(mailbox.availability)}</span>
+            </div>
+          </div>
+          <div class="desktop-profile-app-actions">
+            <span class="desktop-profile-app-platform-icon" aria-hidden="true">${createSVG(config.icon, 18)}</span>
+            <button class="desktop-browser-open" type="button" data-message-copy-email>Copy email</button>
+          </div>
+        </div>
+        <div class="desktop-message-compose">
+          <label class="desktop-message-field">
+            <span>To</span>
+            <input type="text" value="${this.escapeHTML(mailbox.address)}" readonly>
+          </label>
+          <label class="desktop-message-field">
+            <span>Subject</span>
+            <input type="text" value="Quick hello from karakayautku4.dev" data-message-subject>
+          </label>
+          <label class="desktop-message-field desktop-message-field-body">
+            <span>Message</span>
+            <textarea data-message-body>Hi Utku,
+
+I came across your site and wanted to reach out about...</textarea>
+          </label>
+          <div class="desktop-message-actions">
+            <button class="desktop-browser-open" type="button" data-message-compose>Compose Email</button>
+            <a class="desktop-browser-open is-secondary" href="mailto:${this.escapeHTML(mailbox.address)}" target="_blank" rel="noopener noreferrer">Open empty draft</a>
+          </div>
+          <p class="desktop-message-note" data-message-note>${this.escapeHTML(mailbox.note)}</p>
+        </div>
+      </div>
+    `;
+  }
+
   setupPhotosWindow(content, config) {
     const currentImage = content.querySelector('[data-photos-current-image]');
     const thumbnails = content.querySelectorAll('[data-photos-thumb]');
@@ -1067,6 +1155,65 @@ export class DesktopRuntime {
         thumbnails.forEach((node) => node.classList.toggle('is-active', node === thumbnailNode));
       });
     });
+  }
+
+  setupMessageWindow(content, config) {
+    const copyButton = content.querySelector('[data-message-copy-email]');
+    const composeButton = content.querySelector('[data-message-compose]');
+    const subjectInput = content.querySelector('[data-message-subject]');
+    const bodyInput = content.querySelector('[data-message-body]');
+    const note = content.querySelector('[data-message-note]');
+    const address = config.mailbox.address;
+    const openedAt = performance.now();
+
+    copyButton?.addEventListener('click', async () => {
+      const copied = await this.copyText(address);
+      if (note) {
+        note.textContent = copied
+          ? `Email copied: ${address}`
+          : `Copy failed. You can still use ${address}.`;
+      }
+    });
+
+    composeButton?.addEventListener('click', () => {
+      if (performance.now() - openedAt < 250) {
+        return;
+      }
+
+      const subject = subjectInput?.value?.trim() || 'Quick hello from karakayautku4.dev';
+      const body = bodyInput?.value?.trim() || 'Hi Utku,\n\nI came across your site and wanted to reach out about...';
+      const mailtoUrl = `mailto:${encodeURIComponent(address)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+      if (note) {
+        note.textContent = 'Opening your default email app...';
+      }
+    });
+  }
+
+  async copyText(value) {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        return true;
+      }
+    } catch {
+      // Fallback below.
+    }
+
+    try {
+      const input = document.createElement('textarea');
+      input.value = value;
+      input.setAttribute('readonly', 'true');
+      input.style.position = 'absolute';
+      input.style.left = '-9999px';
+      document.body.appendChild(input);
+      input.select();
+      const copied = document.execCommand('copy');
+      document.body.removeChild(input);
+      return copied;
+    } catch {
+      return false;
+    }
   }
 
   renderGitHubAppContent(config) {
@@ -1876,6 +2023,24 @@ export class DesktopRuntime {
 
     if (action.startsWith('open-app:')) {
       this.openWindow(action.replace('open-app:', ''));
+      return;
+    }
+
+    if (action.startsWith('compose-email:')) {
+      const appId = action.replace('compose-email:', '');
+      const url = DESKTOP_APPS[appId]?.url;
+      if (url) {
+        window.location.href = url;
+      }
+      return;
+    }
+
+    if (action.startsWith('copy-email:')) {
+      const appId = action.replace('copy-email:', '');
+      const address = DESKTOP_APPS[appId]?.mailbox?.address;
+      if (address) {
+        this.copyText(address);
+      }
       return;
     }
 
