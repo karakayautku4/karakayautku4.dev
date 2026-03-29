@@ -104,6 +104,50 @@ const DESKTOP_APPS = {
     width: 980,
     height: 700,
     username: 'karakayautku4',
+    mock: {
+      profile: {
+        login: 'karakayautku4',
+        name: 'Utku Karakaya',
+        avatar_url: 'https://avatars.githubusercontent.com/u/242176521?v=4',
+        bio: 'Public repositories and profile details from GitHub.',
+        location: 'Eindhoven, Netherlands',
+        company: '@Forescout',
+        blog: 'https://karakayautku4.dev',
+        twitter_username: 'karakayautku4',
+        public_repos: 1,
+        followers: 1,
+        following: 11,
+        public_gists: 0
+      },
+      repos: [
+        {
+          name: 'karakayautku4.dev',
+          html_url: 'https://github.com/karakayautku4/karakayautku4.dev',
+          description: 'Personal website of Utku Karakaya',
+          language: 'CSS',
+          stargazers_count: 0,
+          forks_count: 0,
+          pushed_at: '2026-03-28T12:00:00Z'
+        }
+      ],
+      events: [
+        {
+          type: 'PushEvent',
+          repo: { name: 'karakayautku4/karakayautku4.dev' },
+          created_at: '2026-03-29T12:30:00Z'
+        },
+        {
+          type: 'PushEvent',
+          repo: { name: 'karakayautku4/karakayautku4.dev' },
+          created_at: '2026-03-29T10:15:00Z'
+        },
+        {
+          type: 'PushEvent',
+          repo: { name: 'karakayautku4/karakayautku4.dev' },
+          created_at: '2026-03-28T18:40:00Z'
+        }
+      ]
+    },
     fallback: {
       kicker: 'GitHub App',
       description: 'This window tries to load public GitHub profile data directly from the GitHub API so the desktop can show a real custom app instead of a blocked embed.',
@@ -328,6 +372,8 @@ export class DesktopRuntime {
     this.zIndex = 20;
     this.windowOffset = 0;
     this.clockTimer = null;
+    this.menubarHoverTimer = null;
+    this.menubarCloseTimer = null;
     this.handleDocumentPointerDown = this.onDocumentPointerDown.bind(this);
     this.handleDocumentKeydown = this.onDocumentKeydown.bind(this);
     this.init();
@@ -1267,12 +1313,12 @@ I came across your site and wanted to reach out about...</textarea>
             </div>
           </section>
           <section class="desktop-github-side-grid">
-            <section class="desktop-github-repos-section desktop-github-orgs-section">
+            <section class="desktop-github-repos-section desktop-github-repos-section-compact">
               <div class="desktop-github-section-head">
-                <p class="desktop-window-kicker">Organizations</p>
-                <span class="desktop-github-section-note" data-github-orgs-note></span>
+                <p class="desktop-window-kicker">Recent repositories</p>
+                <span class="desktop-github-section-note" data-github-updated></span>
               </div>
-              <div class="desktop-github-orgs" data-github-orgs></div>
+              <div class="desktop-github-repos desktop-github-repos-compact" data-github-repos-list></div>
             </section>
             <section class="desktop-github-repos-section desktop-github-events-section">
               <div class="desktop-github-section-head">
@@ -1281,13 +1327,6 @@ I came across your site and wanted to reach out about...</textarea>
               </div>
               <div class="desktop-github-events" data-github-events></div>
             </section>
-          </section>
-          <section class="desktop-github-repos-section">
-            <div class="desktop-github-section-head">
-              <p class="desktop-window-kicker">Recent repositories</p>
-              <span class="desktop-github-section-note" data-github-updated></span>
-            </div>
-            <div class="desktop-github-repos" data-github-repos-list></div>
           </section>
         </div>
         <div class="desktop-github-fallback" hidden>
@@ -1394,11 +1433,10 @@ I came across your site and wanted to reach out about...</textarea>
     };
 
     try {
-      const [profileResponse, reposResponse, orgsResult, eventsResult] = await Promise.all([
+      const [profileResponse, reposResponse, eventsResult] = await Promise.all([
         fetch(`https://api.github.com/users/${config.username}`),
         fetch(`https://api.github.com/users/${config.username}/repos?sort=updated&per_page=6`),
-        fetch(`https://api.github.com/users/${config.username}/orgs`).then((response) => response.ok ? response.json() : []),
-        fetch(`https://api.github.com/users/${config.username}/events/public?per_page=5`).then((response) => response.ok ? response.json() : [])
+        fetch(`https://api.github.com/users/${config.username}/events/public?per_page=10`).then((response) => response.ok ? response.json() : [])
       ]);
 
       if (!profileResponse.ok || !reposResponse.ok) {
@@ -1407,37 +1445,44 @@ I came across your site and wanted to reach out about...</textarea>
 
       const profile = await profileResponse.json();
       const repos = await reposResponse.json();
-      const orgs = Array.isArray(orgsResult) ? orgsResult : [];
       const events = Array.isArray(eventsResult) ? eventsResult : [];
 
       if (!Array.isArray(repos)) {
         throw new Error('GitHub repositories payload was invalid');
       }
 
-      this.populateGitHubWindow(content, profile, repos, orgs, events);
+      this.populateGitHubWindow(content, profile, repos, events);
       showReady();
     } catch {
+      if (config.mock) {
+        this.populateGitHubWindow(content, config.mock.profile, config.mock.repos, config.mock.events);
+        showReady();
+        return;
+      }
+
       showFallback();
     }
   }
 
-  populateGitHubWindow(content, profile, repos, orgs, events) {
+  populateGitHubWindow(content, profile, repos, events) {
     const avatar = content.querySelector('[data-github-avatar]');
     const name = content.querySelector('[data-github-name]');
     const handle = content.querySelector('[data-github-handle]');
     const bio = content.querySelector('[data-github-bio]');
     const meta = content.querySelector('[data-github-meta]');
+    const description = content.querySelector('.desktop-github-app-description');
     const reposCount = content.querySelector('[data-github-repos]');
     const followers = content.querySelector('[data-github-followers]');
     const following = content.querySelector('[data-github-following]');
     const gists = content.querySelector('[data-github-gists]');
     const updated = content.querySelector('[data-github-updated]');
     const reposList = content.querySelector('[data-github-repos-list]');
-    const orgsNote = content.querySelector('[data-github-orgs-note]');
-    const orgsNode = content.querySelector('[data-github-orgs]');
     const eventsNote = content.querySelector('[data-github-events-note]');
     const eventsNode = content.querySelector('[data-github-events]');
+    const commitEvents = events.filter((eventItem) => eventItem?.type === 'PushEvent').slice(0, 3);
+    const featuredRepos = repos.slice(0, 3);
 
+    description.textContent = 'Public profile and repository data from GitHub.';
     avatar.src = profile.avatar_url;
     name.textContent = profile.name || profile.login;
     handle.textContent = `@${profile.login}`;
@@ -1446,16 +1491,15 @@ I came across your site and wanted to reach out about...</textarea>
       profile.location ? `<span>${this.escapeHTML(profile.location)}</span>` : '',
       profile.company ? `<span>${this.escapeHTML(profile.company)}</span>` : '',
       profile.blog ? `<a href="${this.escapeHTML(profile.blog)}" target="_blank" rel="noopener noreferrer">${this.escapeHTML(profile.blog.replace(/^https?:\/\//, ''))}</a>` : '',
-      profile.twitter_username ? `<span>@${this.escapeHTML(profile.twitter_username)}</span>` : '',
-      profile.created_at ? `<span>Joined ${new Date(profile.created_at).getFullYear()}</span>` : ''
+      profile.twitter_username ? `<span>@${this.escapeHTML(profile.twitter_username)}</span>` : ''
     ].filter(Boolean).join('');
     reposCount.textContent = String(profile.public_repos ?? 0);
     followers.textContent = String(profile.followers ?? 0);
     following.textContent = String(profile.following ?? 0);
     gists.textContent = String(profile.public_gists ?? 0);
-    updated.textContent = repos[0]?.pushed_at ? `Updated ${this.formatRelativeTime(repos[0].pushed_at)}` : 'Public profile';
+    updated.textContent = featuredRepos[0]?.pushed_at ? `Updated ${this.formatRelativeTime(featuredRepos[0].pushed_at)}` : 'Public profile';
 
-    reposList.innerHTML = repos.length ? repos.map((repo) => `
+    reposList.innerHTML = featuredRepos.length ? featuredRepos.map((repo) => `
       <article class="desktop-github-repo-card">
         <div class="desktop-github-repo-head">
           <h4>${this.escapeHTML(repo.name)}</h4>
@@ -1471,26 +1515,14 @@ I came across your site and wanted to reach out about...</textarea>
       </article>
     `).join('') : `<article class="desktop-github-repo-card desktop-github-empty-card"><p>No public repositories are visible right now.</p></article>`;
 
-    orgsNote.textContent = orgs.length ? `${orgs.length} visible` : 'No public orgs';
-    orgsNode.innerHTML = orgs.length ? orgs.slice(0, 6).map((org) => `
-      <a class="desktop-github-org-chip" href="https://github.com/${this.escapeHTML(org.login)}" target="_blank" rel="noopener noreferrer">
-        <img src="${org.avatar_url}" alt="${this.escapeHTML(org.login)} avatar">
-        <span>${this.escapeHTML(org.login)}</span>
-      </a>
-    `).join('') : `<p class="desktop-github-empty-copy">No public organization memberships exposed by the API.</p>`;
-
-    eventsNote.textContent = events.length ? `Latest ${events.length}` : 'No public events';
-    eventsNode.innerHTML = events.length ? events.map((eventItem) => `
+    eventsNote.textContent = commitEvents.length ? `Latest ${commitEvents.length}` : 'No recent commits';
+    eventsNode.innerHTML = commitEvents.length ? commitEvents.map((eventItem) => `
       <article class="desktop-github-event-card">
-        <p>${this.escapeHTML(this.formatGitHubEventType(eventItem.type))}</p>
+        <p>Push</p>
         <h4>${this.escapeHTML(eventItem.repo?.name || 'GitHub activity')}</h4>
         <span>${this.formatRelativeTime(eventItem.created_at)}</span>
       </article>
-    `).join('') : `<p class="desktop-github-empty-copy">No recent public events are available from the API right now.</p>`;
-  }
-
-  formatGitHubEventType(type = '') {
-    return type.replace(/Event$/, '').replace(/([a-z])([A-Z])/g, '$1 $2') || 'Activity';
+    `).join('') : `<p class="desktop-github-empty-copy">No recent public commits are available from the API right now.</p>`;
   }
 
   async setupDocumentWindow(content, config) {
@@ -1620,23 +1652,42 @@ I came across your site and wanted to reach out about...</textarea>
 
   maximizeWindow(windowNode) {
     this.rememberWindowFrame(windowNode);
-    windowNode.classList.remove('is-minimized');
-    windowNode.classList.remove('is-snapped-left', 'is-snapped-right');
-    windowNode.classList.add('is-maximized');
-    windowNode.style.left = '18px';
-    windowNode.style.top = '18px';
-    windowNode.style.width = 'calc(100% - 36px)';
-    windowNode.style.height = 'calc(100% - 36px)';
+    this.animateWindowFrame(windowNode, () => {
+      windowNode.classList.remove('is-minimized');
+      windowNode.classList.remove('is-snapped-left', 'is-snapped-right');
+      windowNode.classList.add('is-maximized');
+      windowNode.style.left = '18px';
+      windowNode.style.top = '18px';
+      windowNode.style.width = 'calc(100% - 36px)';
+      windowNode.style.height = 'calc(100% - 36px)';
+    });
     this.persistWindowFrame(windowNode);
   }
 
   restoreWindow(windowNode, appId) {
-    windowNode.classList.remove('is-maximized', 'is-snapped-left', 'is-snapped-right');
-    windowNode.style.left = windowNode.dataset.prevLeft || '40px';
-    windowNode.style.top = windowNode.dataset.prevTop || '36px';
-    windowNode.style.width = windowNode.dataset.prevWidth || `${DESKTOP_APPS[appId].width}px`;
-    windowNode.style.height = windowNode.dataset.prevHeight || `${DESKTOP_APPS[appId].height}px`;
+    this.animateWindowFrame(windowNode, () => {
+      windowNode.classList.remove('is-maximized', 'is-snapped-left', 'is-snapped-right');
+      windowNode.style.left = windowNode.dataset.prevLeft || '40px';
+      windowNode.style.top = windowNode.dataset.prevTop || '36px';
+      windowNode.style.width = windowNode.dataset.prevWidth || `${DESKTOP_APPS[appId].width}px`;
+      windowNode.style.height = windowNode.dataset.prevHeight || `${DESKTOP_APPS[appId].height}px`;
+    });
     this.persistWindowFrame(windowNode);
+  }
+
+  animateWindowFrame(windowNode, applyFrame) {
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
+      applyFrame();
+      return;
+    }
+
+    windowNode.classList.add('is-frame-animating');
+    window.requestAnimationFrame(() => {
+      applyFrame();
+      window.setTimeout(() => {
+        windowNode.classList.remove('is-frame-animating');
+      }, 240);
+    });
   }
 
   animateWindowIn(windowNode) {
@@ -1691,14 +1742,16 @@ I came across your site and wanted to reach out about...</textarea>
     this.rememberWindowFrame(windowNode);
     const stageRect = this.windowsArea.getBoundingClientRect();
     const halfWidth = Math.max(520, (stageRect.width - 30) / 2);
-    windowNode.classList.remove('is-maximized', 'is-snapped-left', 'is-snapped-right');
-    windowNode.classList.add(side === 'left' ? 'is-snapped-left' : 'is-snapped-right');
-    windowNode.style.top = '18px';
-    windowNode.style.width = `${halfWidth}px`;
-    windowNode.style.height = 'calc(100% - 36px)';
-    windowNode.style.left = side === 'left'
-      ? '18px'
-      : `calc(100% - ${Math.round(halfWidth)}px - 18px)`;
+    this.animateWindowFrame(windowNode, () => {
+      windowNode.classList.remove('is-maximized', 'is-snapped-left', 'is-snapped-right');
+      windowNode.classList.add(side === 'left' ? 'is-snapped-left' : 'is-snapped-right');
+      windowNode.style.top = '18px';
+      windowNode.style.width = `${halfWidth}px`;
+      windowNode.style.height = 'calc(100% - 36px)';
+      windowNode.style.left = side === 'left'
+        ? '18px'
+        : `calc(100% - ${Math.round(halfWidth)}px - 18px)`;
+    });
     this.persistWindowFrame(windowNode);
   }
 
@@ -1760,28 +1813,75 @@ I came across your site and wanted to reach out about...</textarea>
     const handle = windowNode.querySelector('[data-window-drag-handle]');
     const appId = windowNode.dataset.appId;
     let dragging = false;
+    let pointerArmed = false;
+    let rafId = 0;
     let startX = 0;
     let startY = 0;
     let originLeft = 0;
     let originTop = 0;
+    let pendingLeft = 0;
+    let pendingTop = 0;
+    let restoreFromSnap = false;
+
+    const flushDragPosition = () => {
+      rafId = 0;
+      windowNode.style.left = `${pendingLeft}px`;
+      windowNode.style.top = `${pendingTop}px`;
+    };
 
     const onPointerMove = (event) => {
-      if (!dragging || windowNode.classList.contains('is-maximized')) {
+      if (!pointerArmed || windowNode.classList.contains('is-maximized')) {
         return;
       }
 
       const deltaX = event.clientX - startX;
       const deltaY = event.clientY - startY;
-      windowNode.style.left = `${Math.max(0, originLeft + deltaX)}px`;
-      windowNode.style.top = `${Math.max(0, originTop + deltaY)}px`;
+
+      if (!dragging) {
+        if (Math.hypot(deltaX, deltaY) < 4) {
+          return;
+        }
+
+        dragging = true;
+        windowNode.classList.add('is-dragging');
+        document.body.classList.add('desktop-window-dragging');
+
+        if (restoreFromSnap) {
+          this.restoreWindow(windowNode, appId);
+          windowNode.classList.remove('is-frame-animating');
+          originLeft = parseFloat(windowNode.style.left) || 0;
+          originTop = parseFloat(windowNode.style.top) || 0;
+          restoreFromSnap = false;
+        }
+      }
+
+      pendingLeft = Math.max(0, originLeft + deltaX);
+      pendingTop = Math.max(0, originTop + deltaY);
+
+      if (!rafId) {
+        rafId = window.requestAnimationFrame(flushDragPosition);
+      }
     };
 
     const stopDragging = () => {
-      dragging = false;
+      pointerArmed = false;
       window.removeEventListener('pointermove', onPointerMove);
       window.removeEventListener('pointerup', stopDragging);
-      this.applySnapFromPosition(windowNode);
-      this.persistWindowFrame(windowNode);
+
+      if (rafId) {
+        window.cancelAnimationFrame(rafId);
+        flushDragPosition();
+      }
+
+      if (dragging) {
+        dragging = false;
+        windowNode.classList.remove('is-dragging');
+        document.body.classList.remove('desktop-window-dragging');
+        this.applySnapFromPosition(windowNode);
+        this.persistWindowFrame(windowNode);
+      } else {
+        document.body.classList.remove('desktop-window-dragging');
+      }
     };
 
     handle.addEventListener('pointerdown', (event) => {
@@ -1789,17 +1889,15 @@ I came across your site and wanted to reach out about...</textarea>
         return;
       }
 
-      dragging = true;
+      pointerArmed = true;
+      dragging = false;
       startX = event.clientX;
       startY = event.clientY;
-
-      if (windowNode.classList.contains('is-snapped-left') || windowNode.classList.contains('is-snapped-right')) {
-        this.restoreWindow(windowNode, appId);
-      }
-
+      restoreFromSnap = windowNode.classList.contains('is-snapped-left') || windowNode.classList.contains('is-snapped-right');
       originLeft = parseFloat(windowNode.style.left) || 0;
       originTop = parseFloat(windowNode.style.top) || 0;
       this.focusWindow(windowNode);
+      handle.setPointerCapture?.(event.pointerId);
       window.addEventListener('pointermove', onPointerMove);
       window.addEventListener('pointerup', stopDragging);
     });
@@ -1933,24 +2031,75 @@ I came across your site and wanted to reach out about...</textarea>
           return;
         }
 
+        this.clearMenubarTimers();
         this.openMenubarMenu(menuName);
       });
 
       menuNode.addEventListener('mouseenter', () => {
         if (!this.activeMenuName || this.activeMenuName === menuName) {
+          this.cancelMenubarClose();
           return;
         }
 
-        this.openMenubarMenu(menuName);
+        this.cancelMenubarClose();
+        this.queueMenubarOpen(menuName, 55);
+      });
+
+      menuNode.addEventListener('mouseleave', () => {
+        if (!this.activeMenuName) {
+          return;
+        }
+
+        this.scheduleMenubarClose(120);
       });
 
       menuNode.querySelectorAll('[data-menu-dropdown] button').forEach((itemNode) => {
         itemNode.addEventListener('click', () => {
+          this.clearMenubarTimers();
           this.handleMenubarAction(itemNode.dataset.menuAction || '');
           this.closeMenubarMenus();
         });
       });
     });
+  }
+
+  clearMenubarTimers() {
+    this.cancelMenubarOpen();
+    this.cancelMenubarClose();
+  }
+
+  cancelMenubarOpen() {
+    if (!this.menubarHoverTimer) {
+      return;
+    }
+
+    window.clearTimeout(this.menubarHoverTimer);
+    this.menubarHoverTimer = null;
+  }
+
+  cancelMenubarClose() {
+    if (!this.menubarCloseTimer) {
+      return;
+    }
+
+    window.clearTimeout(this.menubarCloseTimer);
+    this.menubarCloseTimer = null;
+  }
+
+  queueMenubarOpen(menuName, delay = 0) {
+    this.cancelMenubarOpen();
+    this.menubarHoverTimer = window.setTimeout(() => {
+      this.openMenubarMenu(menuName);
+      this.menubarHoverTimer = null;
+    }, delay);
+  }
+
+  scheduleMenubarClose(delay = 0) {
+    this.cancelMenubarClose();
+    this.menubarCloseTimer = window.setTimeout(() => {
+      this.closeMenubarMenus();
+      this.menubarCloseTimer = null;
+    }, delay);
   }
 
   handleMenubarAction(action) {
@@ -2054,6 +2203,7 @@ I came across your site and wanted to reach out about...</textarea>
   }
 
   openMenubarMenu(menuName) {
+    this.clearMenubarTimers();
     this.activeMenuName = menuName;
     this.menuItems?.querySelectorAll('[data-menu-name]').forEach((menuNode) => {
       const isActive = menuNode.dataset.menuName === menuName;
@@ -2063,6 +2213,7 @@ I came across your site and wanted to reach out about...</textarea>
   }
 
   closeMenubarMenus() {
+    this.clearMenubarTimers();
     this.activeMenuName = null;
     this.menuItems?.querySelectorAll('[data-menu-name]').forEach((menuNode) => {
       menuNode.classList.remove('is-open');
@@ -2480,11 +2631,11 @@ I came across your site and wanted to reach out about...</textarea>
       const centerX = rect.left + (rect.width / 2);
       const distance = Math.abs(pointerX - centerX);
       const influence = Math.max(0, 1 - (distance / 160));
-      const scale = 1 + (influence * 0.22);
-      const rise = Math.round(influence * 14);
+      const scale = 1 + (influence * 0.16);
+      const rise = Math.round(influence * 10);
       launcher.style.setProperty('--dock-scale', scale.toFixed(3));
       launcher.style.setProperty('--dock-rise', `${rise}px`);
-      launcher.style.setProperty('--dock-opacity', (0.72 + (influence * 0.28)).toFixed(3));
+      launcher.style.setProperty('--dock-opacity', (0.8 + (influence * 0.2)).toFixed(3));
     });
   }
 
