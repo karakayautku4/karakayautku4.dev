@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { projects } from '../data/site';
+
+const description = projects.paragraphs[0];
+---
+
+<BaseLayout title={projects.title} description={description} path="/projects">
+  <header class="intro projects-copy">
+    <p class="eyebrow">Projects</p>
+    <h1>{projects.title}</h1>
+    {projects.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <p>
+      <a class="button button-solid" href={projects.githubHref} rel="noopener noreferrer">
+        {projects.githubLabel}
+      </a>
+    </p>
+  </header>
+</BaseLayout>
