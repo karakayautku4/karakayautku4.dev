@@ -10,9 +10,15 @@ const description = about.paragraphs[0];
     <p class="eyebrow">About</p>
     <h1>{about.headline}</h1>
     {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+    <nav class="section-jumps" aria-label="On this page">
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#interests">Interests</a>
+    </nav>
   </header>
 
-  <section class="section-block" aria-labelledby="experience-heading">
+  <section class="section-block" id="experience" aria-labelledby="experience-heading">
     <h2 id="experience-heading">Experience</h2>
     <div class="stack">
       {
@@ -32,7 +38,7 @@ const description = about.paragraphs[0];
     </div>
   </section>
 
-  <section class="section-block" aria-labelledby="skills-heading">
+  <section class="section-block" id="skills" aria-labelledby="skills-heading">
     <h2 id="skills-heading">Skills</h2>
     <div class="skill-grid">
       {
@@ -48,7 +54,7 @@ const description = about.paragraphs[0];
     </div>
   </section>
 
-  <section class="section-block" aria-labelledby="education-heading">
+  <section class="section-block" id="education" aria-labelledby="education-heading">
     <h2 id="education-heading">Education</h2>
     <div class="edu-grid">
       {
@@ -67,7 +73,7 @@ const description = about.paragraphs[0];
     </div>
   </section>
 
-  <section class="section-block" aria-labelledby="interests-heading">
+  <section class="section-block" id="interests" aria-labelledby="interests-heading">
     <h2 id="interests-heading">Interests</h2>
     <p class="interests">{interests}</p>
   </section>

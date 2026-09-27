@@ -32,7 +32,9 @@ import { currentRole, homeLead, site } from '../data/site';
 
   <ul class="action-row">
     <li><a class="button button-solid" href="/about">About</a></li>
-    <li><a class="button" href="/projects">Projects</a></li>
-    <li><a class="button" href={site.cv.href} download={site.cv.fileName}>{site.cv.label}</a></li>
+    <li><a class="button button-solid" href={site.cv.href} download={site.cv.fileName}>{site.cv.label}</a></li>
+    <li>
+      <a class="button" href={site.contact.href} rel="me noopener noreferrer">{site.contact.label}</a>
+    </li>
   </ul>
 </BaseLayout>

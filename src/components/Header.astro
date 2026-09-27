@@ -24,6 +24,9 @@ function isCurrent(href: string) {
         }
       </ul>
     </nav>
-    <a class="header-cv" href={site.cv.href} download={site.cv.fileName}>CV</a>
+    <div class="header-actions">
+      <a class="header-pill" href={site.contact.href} rel="me noopener noreferrer">{site.contact.label}</a>
+      <a class="header-pill" href={site.cv.href} download={site.cv.fileName}>CV</a>
+    </div>
   </div>
 </header>
