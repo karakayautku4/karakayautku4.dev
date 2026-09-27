@@ -33,7 +33,7 @@ export const socials = [
 ] as const;
 
 export const currentRole = {
-  company: 'Forescout',
+  company: 'Forescout Technologies Inc.',
   href: 'https://www.forescout.com/',
   title: 'Software Development Engineer in Test',
   domain: 'Cybersecurity',
@@ -46,13 +46,13 @@ export const about = {
   headline: 'I build automation tools that help other teams move faster.',
   paragraphs: [
     'Software Development Engineer in Test with 6+ years across cybersecurity, telecom, and mapping. These days the job is less "own one test suite" and more "find the friction, then ship tools that take it away" — often with AI in the mix.',
-    'At Forescout in Eindhoven I develop automation tools that accelerate teams across the company. Before that: telecom billing at Calvi Insight, map validation at SeeWay.ai (ex-NavInfo Europe), and earlier test roles at Huawei and Ericsson.',
+    'At Forescout Technologies Inc. in Eindhoven I develop automation tools that accelerate teams across the company. Before that: telecom billing at Calvi Insight, map validation at SeeWay.ai (ex-NavInfo Europe), and earlier test roles at Huawei and Ericsson.',
   ],
 } as const;
 
 export const experience = [
   {
-    company: 'Forescout',
+    company: 'Forescout Technologies Inc.',
     href: 'https://www.forescout.com/',
     title: 'Software Development Engineer in Test',
     domain: 'Cybersecurity',
