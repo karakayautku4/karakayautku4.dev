@@ -1,18 +1,51 @@
 :root {
-  --paper: #f2f4f6;
-  --paper-deep: #e7ebef;
-  --card: #fbfcfd;
-  --ink: #2c3136;
-  --muted: #5c656d;
-  --line: #e1e5ea;
-  --shadow: 0 14px 36px rgba(32, 36, 40, 0.07);
-  --shadow-hover: 0 16px 34px rgba(32, 36, 40, 0.12);
-  --press: #d8dee4;
+  --paper: #fff;
+  --paper-deep: #f3f3f3;
+  --card: #fff;
+  --ink: #111;
+  --muted: #4d4d4d;
+  --line: #e4e4e4;
+  --line-strong: #c8c8c8;
+  --line-press: #b0b0b0;
+  --accent: #b1040e;
+  --accent-press: #8c030b;
+  --accent-active: #6d0208;
+  --on-accent: #fff;
+  --glow: #fff6f6;
+  --shadow: 0 14px 36px rgba(17, 17, 17, 0.07);
+  --shadow-hover: 0 16px 34px rgba(17, 17, 17, 0.12);
+  --shadow-press: 0 8px 18px rgba(17, 17, 17, 0.14);
+  --press: #e6e6e6;
+  --header-bg: rgba(255, 255, 255, 0.92);
   --radius: 1.25rem;
   --header: 4.5rem;
   --content: 68rem;
   --font: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
-  color-scheme: light;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #222;
+    --paper-deep: #2c2c2c;
+    --card: #2a2a2a;
+    --ink: #eee;
+    --muted: #c2c2c2;
+    --line: #3a3a3a;
+    --line-strong: #555;
+    --line-press: #6a6a6a;
+    --accent: #ff424d;
+    --accent-press: #ff6a72;
+    --accent-active: #ff8d93;
+    --on-accent: #1a1a1a;
+    --glow: #2a2222;
+    --shadow: 0 14px 36px rgba(0, 0, 0, 0.35);
+    --shadow-hover: 0 16px 34px rgba(0, 0, 0, 0.48);
+    --shadow-press: 0 8px 18px rgba(0, 0, 0, 0.42);
+    --press: #383838;
+    --header-bg: rgba(34, 34, 34, 0.92);
+    color-scheme: dark;
+  }
 }
 
 *,
@@ -33,7 +66,7 @@ body {
   line-height: 1.6;
   color: var(--ink);
   background:
-    radial-gradient(900px 420px at 0% -10%, #f7f9fb 0%, transparent 60%),
+    radial-gradient(900px 420px at 0% -10%, var(--glow) 0%, transparent 60%),
     var(--paper);
 }
 
@@ -43,7 +76,7 @@ img {
 }
 
 a {
-  color: var(--ink);
+  color: var(--accent);
   text-underline-offset: 0.18em;
 }
 
@@ -52,7 +85,7 @@ a:hover {
 }
 
 :focus-visible {
-  outline: 2px solid var(--ink);
+  outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
 
@@ -89,7 +122,7 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 5;
-  background: rgba(242, 244, 246, 0.92);
+  background: var(--header-bg);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(10px);
 }
@@ -111,6 +144,7 @@ a:hover {
 
 .brand {
   margin-right: auto;
+  color: var(--ink);
   font-weight: 700;
   letter-spacing: -0.02em;
   text-decoration: none;
@@ -151,6 +185,7 @@ a:hover {
   min-height: 2.75rem;
   padding: 0.35rem 0.8rem;
   border-radius: 999px;
+  color: var(--ink);
   text-decoration: none;
   font-weight: 600;
 }
@@ -296,27 +331,31 @@ h1 {
   padding: 0.55rem 1rem;
   border-radius: 999px;
   border: 1px solid var(--ink);
+  color: var(--ink);
   text-decoration: none;
   font-weight: 600;
   background: transparent;
 }
 
 .button-solid {
-  background: var(--ink);
-  color: #f4f6f8;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
 }
 
 .button-solid:hover,
 .button-solid:active {
-  color: #f4f6f8;
+  color: var(--on-accent);
 }
 
 .button-solid:hover {
-  background: #1e2328;
+  background: var(--accent-press);
+  border-color: var(--accent-press);
 }
 
 .button-solid:active {
-  background: #121518;
+  background: var(--accent-active);
+  border-color: var(--accent-active);
 }
 
 .intro {
@@ -350,15 +389,15 @@ h1 {
 .role:hover,
 .skill-card:hover,
 .repo-card:hover {
-  border-color: #c5ccd3;
+  border-color: var(--line-strong);
   box-shadow: var(--shadow-hover);
 }
 
 .role:active,
 .skill-card:active,
 .repo-card:active {
-  border-color: #b7c0c8;
-  box-shadow: 0 8px 18px rgba(32, 36, 40, 0.14);
+  border-color: var(--line-press);
+  box-shadow: var(--shadow-press);
 }
 
 .role-top,
@@ -422,6 +461,7 @@ h1 {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: var(--card);
+  color: var(--ink);
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
