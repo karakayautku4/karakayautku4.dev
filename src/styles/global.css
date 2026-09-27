@@ -6,6 +6,8 @@
   --muted: #5c656d;
   --line: #e1e5ea;
   --shadow: 0 14px 36px rgba(32, 36, 40, 0.07);
+  --shadow-hover: 0 16px 34px rgba(32, 36, 40, 0.12);
+  --press: #d8dee4;
   --radius: 1.25rem;
   --header: 4.5rem;
   --content: 68rem;
@@ -102,9 +104,9 @@ a:hover {
 .header-inner {
   display: flex;
   align-items: center;
-  gap: 1rem 1.5rem;
+  gap: 0.75rem 1.25rem;
   min-height: var(--header);
-  padding-block: 0.75rem;
+  padding-block: 0.55rem;
 }
 
 .brand {
@@ -135,9 +137,36 @@ a:hover {
 }
 
 .primary-nav a,
-.header-cv {
+.header-pill,
+.button,
+.section-jumps a {
+  transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.primary-nav a,
+.header-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
   text-decoration: none;
   font-weight: 600;
+}
+
+.primary-nav a:hover,
+.header-pill:hover,
+.button:hover,
+.section-jumps a:hover {
+  background: var(--paper-deep);
+}
+
+.primary-nav a:active,
+.header-pill:active,
+.button:active,
+.section-jumps a:active {
+  background: var(--press);
 }
 
 .primary-nav a[aria-current="page"] {
@@ -145,10 +174,14 @@ a:hover {
   text-underline-offset: 0.28em;
 }
 
-.header-cv {
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.header-pill {
   border: 1px solid var(--ink);
-  border-radius: 999px;
-  padding: 0.25rem 0.75rem;
 }
 
 .page {
@@ -265,8 +298,17 @@ h1 {
   color: #f4f6f8;
 }
 
+.button-solid:hover,
+.button-solid:active {
+  color: #f4f6f8;
+}
+
 .button-solid:hover {
   background: #1e2328;
+}
+
+.button-solid:active {
+  background: #121518;
 }
 
 .intro {
@@ -286,8 +328,29 @@ h1 {
 
 .role,
 .skill-card,
-.edu-card {
+.edu-card,
+.repo-card {
   padding: 1.1rem 1.2rem;
+}
+
+.role,
+.skill-card,
+.repo-card {
+  transition: box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.role:hover,
+.skill-card:hover,
+.repo-card:hover {
+  border-color: #c5ccd3;
+  box-shadow: var(--shadow-hover);
+}
+
+.role:active,
+.skill-card:active,
+.repo-card:active {
+  border-color: #b7c0c8;
+  box-shadow: 0 8px 18px rgba(32, 36, 40, 0.14);
 }
 
 .role-top,
@@ -336,8 +399,66 @@ h1 {
   font-size: 0.92rem;
 }
 
+.section-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.35rem;
+}
+
+.section-jumps a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--card);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
 .section-block {
   margin-top: 2.4rem;
+  scroll-margin-top: 6.5rem;
+}
+
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 0.85rem;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.repo-card {
+  display: grid;
+  align-content: start;
+  gap: 0.45rem;
+  height: 100%;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  color: inherit;
+  text-decoration: none;
+}
+
+.repo-card h2 {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.repo-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.repo-language {
+  font-size: 0.92rem;
+  font-weight: 600;
 }
 
 .section-block > h2 {
@@ -394,12 +515,21 @@ h1 {
 @media (max-width: 720px) {
   .header-inner {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
+    gap: 0.45rem 0.6rem;
   }
 
   .primary-nav {
     grid-column: 1 / -1;
+  }
+
+  .primary-nav ul {
+    gap: 0.15rem;
+  }
+
+  .section-block {
+    scroll-margin-top: 8.75rem;
   }
 
   .hero {
@@ -427,5 +557,15 @@ h1 {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .primary-nav a,
+  .header-pill,
+  .button,
+  .section-jumps a,
+  .role,
+  .skill-card,
+  .repo-card {
+    transition: none;
   }
 }

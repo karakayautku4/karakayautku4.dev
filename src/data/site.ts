@@ -11,6 +11,10 @@ export const site = {
     label: 'Download CV',
     fileName: 'Utku-Karakaya-CV.pdf',
   },
+  contact: {
+    href: 'https://linkedin.com/in/karakayautku4',
+    label: 'Contact',
+  },
 } as const;
 
 export const homeLead =
@@ -133,8 +137,8 @@ export const interests =
 export const projects = {
   title: 'Projects',
   paragraphs: [
-    'No public case studies yet. I would rather keep this page empty than invent write-ups for work I cannot share.',
-    'I will add project write-ups here when they are ready.',
+    'No public write-ups yet. I will add case studies here when they are ready.',
+    'Until then, the code and recent activity are on GitHub.',
   ],
   githubLabel: 'GitHub',
   githubHref: 'https://github.com/karakayautku4',
