@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { about, education, experience, interests, skillGroups } from '../data/site';
+
+const description = about.paragraphs[0];
+---
+
+<BaseLayout title="About" description={description} path="/about">
+  <header class="intro">
+    <p class="eyebrow">About</p>
+    <h1>{about.headline}</h1>
+    {about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+  </header>
+
+  <section class="section-block" aria-labelledby="experience-heading">
+    <h2 id="experience-heading">Experience</h2>
+    <div class="stack">
+      {
+        experience.map((role) => (
+          <article class="role">
+            <div class="role-top">
+              <h3>
+                <a href={role.href} rel="noopener noreferrer">{role.company}</a>
+              </h3>
+              <p class="timeline">{role.timeline}</p>
+            </div>
+            <p>{role.title}</p>
+            <p class="meta">{role.domain} · {role.place}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Skills</h2>
+    <div class="skill-grid">
+      {
+        skillGroups.map((group) => (
+          <article class="skill-card">
+            <h3>{group.title}</h3>
+            <ul class="pills">
+              {group.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="education-heading">
+    <h2 id="education-heading">Education</h2>
+    <div class="edu-grid">
+      {
+        education.map((item) => (
+          <article class="edu-card">
+            <div class="edu-top">
+              <h3>{item.credential}</h3>
+              <p class="timeline">{item.years}</p>
+            </div>
+            <p>
+              <a href={item.href} rel="noopener noreferrer">{item.school}</a>
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block" aria-labelledby="interests-heading">
+    <h2 id="interests-heading">Interests</h2>
+    <p class="interests">{interests}</p>
+  </section>
+</BaseLayout>

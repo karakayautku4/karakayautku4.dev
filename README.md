@@ -1,92 +1,68 @@
 # karakayautku4.dev
 
-Personal website of Utku Karakaya, built as a static site with vanilla HTML, CSS, and JavaScript.
-
-## Overview
-
-The site combines a traditional multi-page structure with a desktop-style homepage experience on larger screens.
-
-Current highlights:
-- Desktop-inspired home screen with draggable, resizable app windows, menubar, dock, and desktop shortcuts
-- Separate mobile home experience with the standard page layout instead of the desktop runtime
-- Custom profile windows for social platforms that do not embed reliably
-- GitHub profile app powered by public GitHub API data
-- In-window CV document viewer
-- Photos app backed by local image assets
-- Message Me desktop app that opens a prefilled email draft to `k4utku@gmail.com`
-- Static build pipeline for HTML, CSS, and sitemap generation
+Personal website of Utku Karakaya. A small static Astro site: Home, About, and Projects, plus a downloadable CV.
 
 ## Stack
 
-- HTML
-- CSS
-- Vanilla JavaScript modules
-- Node.js build script
+- [Astro](https://astro.build) static output
+- Typed content in `src/data/site.ts`
+- Pages rendered to HTML at build time
+- No client-side application runtime
 
-## Runtime Notes
+## Local preview
 
-- Desktop mode is enabled on the homepage above the desktop breakpoint and runs through the desktop runtime module.
-- Mobile and smaller tablet widths fall back to the standard responsive homepage layout.
-- Internal pages remain static multi-page documents and can also be rendered in embedded mode for desktop windows.
+Requirements: Node.js 18 or newer. The GitHub Pages workflow uses Node.js 24.
 
-## Project Structure
-
-```text
-.
-├── .github/
-│   └── workflows/
-├── assets/
-│   ├── css/
-│   │   └── src/
-│   ├── images/
-│   └── js/
-│       └── modules/
-├── pages/
-├── build.js
-├── CNAME
-├── index.html
-├── package.json
-├── robots.txt
-└── sitemap.xml
+```bash
+npm install
+npm run dev
 ```
 
-## Development
+The dev server prints a local URL, usually http://localhost:4321.
 
-Requirements:
-- Node.js 18+
-
-Recommended:
-- Node.js 24 locally if you want parity with the GitHub Pages workflow
-
-Available scripts:
+Production build and local preview of that build:
 
 ```bash
 npm run build
-npm run watch
-npm run build:css
-npm run build:html
+npm run preview
+```
+
+`npm run build` writes the site to `dist/`.
+
+## Project structure
+
+```text
+.
+├── public/                 # CV, profile image, favicon, CNAME
+├── src/
+│   ├── components/
+│   ├── data/site.ts        # locked copy, roles, skills, links
+│   ├── layouts/
+│   ├── pages/              # /, /about, /projects
+│   └── styles/
+├── astro.config.mjs
+└── package.json
 ```
 
 ## Deployment
 
-This project is structured for static hosting and is currently configured for GitHub Pages via the production domain:
+The live site is https://karakayautku4.dev.
 
-- https://karakayautku4.dev
+GitHub Actions (`.github/workflows/deploy.yml`) deploys only from `main`:
 
-Deployments are handled automatically on pushes to `main` through GitHub Actions in `.github/workflows/deploy.yml`.
+1. `npm ci`
+2. `npm run build`
+3. Package `dist/` as the GitHub Pages artifact
+4. Deploy with `actions/deploy-pages`
 
-The workflow currently uses:
-- `actions/checkout@v6`
-- `actions/setup-node@v6` with Node.js 24
-- `actions/configure-pages@v6`
-- `actions/upload-pages-artifact@v4`
-- `actions/deploy-pages@v5`
+This workflow still uses the existing Pages artifact format (an uncompressed `github-pages` tar uploaded with `actions/upload-artifact`). It publishes the Astro `dist/` directory instead of the repository root. Merging the Astro remake is what switches production. A pull request does not deploy.
 
-Before pushing deployment-related changes, run:
+For Cloudflare Pages later, use:
 
-```bash
-npm run build
-```
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Keep `public/CNAME` if the custom domain stays on GitHub Pages.
 
 ## License
 

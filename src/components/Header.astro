@@ -1,0 +1,29 @@
+---
+import { nav, site } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isCurrent(href: string) {
+  return path === href;
+}
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/">{site.name}</a>
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a class="header-cv" href={site.cv.href} download={site.cv.fileName}>CV</a>
+  </div>
+</header>

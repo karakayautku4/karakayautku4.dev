@@ -1,0 +1,22 @@
+---
+import { site, socials } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <ul class="social-list">
+      {
+        socials.map((item) => (
+          <li>
+            <a href={item.href} rel="me noopener noreferrer">{item.label}</a>
+          </li>
+        ))
+      }
+    </ul>
+    <p class="footer-meta">
+      <a href={site.cv.href} download={site.cv.fileName}>{site.cv.label}</a>
+      <span aria-hidden="true"> · </span>
+      <span>{site.domain}</span>
+    </p>
+  </div>
+</footer>
