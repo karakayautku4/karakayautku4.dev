@@ -21,6 +21,7 @@ const image = new URL(site.profileImage, site.url).href;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -36,6 +37,17 @@ const image = new URL(site.profileImage, site.url).href;
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {
+      path === '/' && (
+        <link
+          rel="preload"
+          as="image"
+          href={site.profileImage}
+          type="image/webp"
+          fetchpriority="high"
+        />
+      )
+    }
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'Person',
