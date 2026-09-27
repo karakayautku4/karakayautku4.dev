@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { about, education, experience, interests, site, skillGroups } from '../data/site';
+
+const description = `${site.name} is a ${site.jobTitle} in ${site.location}. Experience, skills, and education.`;
+---
+
+<BaseLayout title="CV" description={description} path={site.cvPage} bodyClass="cv-page">
+  <header class="intro">
+    <p class="eyebrow">CV</p>
+    <h1>{site.name}</h1>
+    <p>{site.jobTitle} · {site.location}</p>
+    <p>{about.headline}</p>
+    <ul class="action-row">
+      <li>
+        <a class="button button-solid" href={site.cv.href} download={site.cv.fileName}>Download PDF</a>
+      </li>
+      <li>
+        <a class="button" href={site.contact.href} rel="me noopener noreferrer">{site.contact.label}</a>
+      </li>
+    </ul>
+  </header>
+
+  <section class="section-block" id="experience" aria-labelledby="cv-experience">
+    <h2 id="cv-experience">Experience</h2>
+    <div class="stack">
+      {
+        experience.map((role) => (
+          <article class="role">
+            <div class="role-top">
+              <h3>
+                <a href={role.href} rel="noopener noreferrer">{role.company}</a>
+              </h3>
+              <p class="timeline">{role.timeline}</p>
+            </div>
+            <p>{role.title}</p>
+            <p class="meta">{role.domain} · {role.place}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block" id="skills" aria-labelledby="cv-skills">
+    <h2 id="cv-skills">Skills</h2>
+    <div class="skill-grid">
+      {
+        skillGroups.map((group) => (
+          <article class="skill-card">
+            <h3>{group.title}</h3>
+            <ul class="pills">
+              {group.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block" id="education" aria-labelledby="cv-education">
+    <h2 id="cv-education">Education</h2>
+    <div class="edu-grid">
+      {
+        education.map((item) => (
+          <article class="edu-card">
+            <div class="edu-top">
+              <h3>{item.credential}</h3>
+              <p class="timeline">{item.years}</p>
+            </div>
+            <p>
+              <a href={item.href} rel="noopener noreferrer">{item.school}</a>
+            </p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section-block" id="interests" aria-labelledby="cv-interests">
+    <h2 id="cv-interests">Interests</h2>
+    <p class="interests">{interests}</p>
+  </section>
+</BaseLayout>

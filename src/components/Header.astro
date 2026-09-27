@@ -26,7 +26,7 @@ function isCurrent(href: string) {
     </nav>
     <div class="header-actions">
       <a class="header-pill" href={site.contact.href} rel="me noopener noreferrer">{site.contact.label}</a>
-      <a class="header-pill" href={site.cv.href} download={site.cv.fileName}>CV</a>
+      <a class="header-pill" href={site.cvPage} aria-current={path === site.cvPage ? 'page' : undefined}>CV</a>
     </div>
   </div>
 </header>
