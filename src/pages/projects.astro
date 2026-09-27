@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { projects } from '../data/site';
+import { projectStubs, projects } from '../data/site';
 
 const description = projects.paragraphs[0];
 
@@ -60,6 +60,25 @@ try {
       </a>
     </p>
   </header>
+
+  <section class="section-block" aria-labelledby="draft-notes">
+    <h2 id="draft-notes">Draft notes</h2>
+    <div class="stack">
+      {
+        projectStubs.map((stub) => (
+          <article class="stub-card">
+            <p class="eyebrow">{stub.status}</p>
+            <h3>{stub.title}</h3>
+            <p class="stub-note">{stub.note}</p>
+            <p>{stub.summary}</p>
+            <ul class="pills">
+              {stub.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 
   {
     repos.length > 0 && (

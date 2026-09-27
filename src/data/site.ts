@@ -6,6 +6,9 @@ export const site = {
   location: 'Eindhoven',
   profileImage: '/images/profile.webp',
   profileAlt: 'Portrait of Utku Karakaya',
+  shareImage: '/og.png',
+  shareImageAlt: 'Utku Karakaya, Software Development Engineer in Test — karakayautku4.dev',
+  cvPage: '/cv',
   cv: {
     href: '/Utku-Karakaya-CV.pdf',
     label: 'Download CV',
@@ -137,9 +140,36 @@ export const interests =
 export const projects = {
   title: 'Projects',
   paragraphs: [
-    'No public write-ups yet. I will add case studies here when they are ready.',
-    'Until then, the code and recent activity are on GitHub.',
+    'The notes below are drafts. I will replace them with real write-ups when they are ready.',
+    'Code and recent activity are on GitHub.',
   ],
   githubLabel: 'GitHub',
   githubHref: 'https://github.com/karakayautku4',
 } as const;
+
+export const projectStubs = [
+  {
+    title: 'Tools for teams beyond one test suite',
+    status: 'draft',
+    note: 'Draft — replace with your write-up.',
+    summary:
+      'The public thread is cross-team automation: find the friction, then ship a tool that takes it away, often with AI in the mix. This starter note does not describe an internal product or claim results.',
+    tags: ['Python', 'AI', 'Automation'],
+  },
+  {
+    title: 'Telecom billing automation',
+    status: 'draft',
+    note: 'Draft — replace with your write-up.',
+    summary:
+      'Billing and portal work used UI and API checks — Playwright, Pytest, and Postman — so regressions showed up in CI. A finished write-up would explain the checks, not internal account details.',
+    tags: ['Playwright', 'Pytest', 'Postman'],
+  },
+  {
+    title: 'Map validation checks',
+    status: 'draft',
+    note: 'Draft — replace with your write-up.',
+    summary:
+      'Mapping work mixed Python with data queries so product issues showed up before release. This is a placeholder for that story once it is ready to publish.',
+    tags: ['Python', 'SQL'],
+  },
+] as const;
