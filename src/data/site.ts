@@ -23,13 +23,13 @@ export const nav = [
 ] as const;
 
 export const socials = [
-  { href: 'https://github.com/karakayautku4', label: 'GitHub' },
-  { href: 'https://tryhackme.com/p/karakayautku4', label: 'TryHackMe' },
-  { href: 'https://www.hackerrank.com/karakayautku4', label: 'HackerRank' },
-  { href: 'https://linkedin.com/in/karakayautku4', label: 'LinkedIn' },
-  { href: 'https://x.com/karakayautku4', label: 'X' },
-  { href: 'https://instagram.com/karakayautku4', label: 'Instagram' },
-  { href: 'https://www.reddit.com/user/karakayautku4/', label: 'Reddit' },
+  { href: 'https://github.com/karakayautku4', label: 'GitHub', icon: 'github' },
+  { href: 'https://tryhackme.com/p/karakayautku4', label: 'TryHackMe', icon: 'tryhackme' },
+  { href: 'https://www.hackerrank.com/karakayautku4', label: 'HackerRank', icon: 'hackerrank' },
+  { href: 'https://linkedin.com/in/karakayautku4', label: 'LinkedIn', icon: 'linkedin' },
+  { href: 'https://x.com/karakayautku4', label: 'X', icon: 'x' },
+  { href: 'https://instagram.com/karakayautku4', label: 'Instagram', icon: 'instagram' },
+  { href: 'https://www.reddit.com/user/karakayautku4/', label: 'Reddit', icon: 'reddit' },
 ] as const;
 
 export const currentRole = {

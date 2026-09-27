@@ -1,0 +1,13 @@
+---
+import { socialIconPaths, type SocialIconName } from '../data/social-icons';
+
+interface Props {
+  name: SocialIconName;
+}
+
+const { name } = Astro.props;
+---
+
+<svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <path fill="currentColor" d={socialIconPaths[name]} />
+</svg>
