@@ -1,0 +1,30 @@
+---
+interface Logo {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  srcDark?: string;
+  plate?: boolean;
+}
+
+interface Props {
+  logo: Logo;
+  size?: 'row' | 'callout';
+}
+
+const { logo, size = 'row' } = Astro.props;
+---
+
+<span class:list={['company-mark', size === 'callout' && 'is-callout', logo.plate && 'company-mark-plate']}>
+  {
+    logo.srcDark ? (
+      <picture>
+        <source srcset={logo.srcDark} media="(prefers-color-scheme: dark)" />
+        <img class="company-logo" src={logo.src} width={logo.width} height={logo.height} alt={logo.alt} />
+      </picture>
+    ) : (
+      <img class="company-logo" src={logo.src} width={logo.width} height={logo.height} alt={logo.alt} />
+    )
+  }
+</span>

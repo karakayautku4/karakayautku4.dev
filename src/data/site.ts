@@ -39,9 +39,46 @@ export const socials = [
   { href: 'https://www.reddit.com/user/karakayautku4/', label: 'Reddit', icon: 'reddit' },
 ] as const;
 
+export const logos = {
+  forescout: {
+    src: '/images/logos/forescout.svg',
+    srcDark: '/images/logos/forescout-dark.svg',
+    alt: 'Forescout Technologies Inc. logo',
+    width: 1280,
+    height: 174,
+  },
+  calvi: {
+    src: '/images/logos/calvi.svg',
+    alt: 'Calvi Insight logo',
+    width: 588,
+    height: 128,
+  },
+  seeway: {
+    src: '/images/logos/seeway.png',
+    alt: 'SeeWay.ai logo',
+    width: 590,
+    height: 167,
+  },
+  huawei: {
+    src: '/images/logos/huawei.png',
+    alt: 'Huawei logo',
+    width: 266,
+    height: 60,
+    plate: true,
+  },
+  ericsson: {
+    src: '/images/logos/ericsson.svg',
+    srcDark: '/images/logos/ericsson-dark.svg',
+    alt: 'Ericsson logo',
+    width: 1500,
+    height: 304,
+  },
+} as const;
+
 export const currentRole = {
   company: 'Forescout Technologies Inc.',
   href: 'https://www.forescout.com/',
+  logo: logos.forescout,
   title: 'Software Development Engineer in Test',
   domain: 'Cybersecurity',
   timeline: 'Nov 2025 – Present',
@@ -61,6 +98,7 @@ export const experience = [
   {
     company: 'Forescout Technologies Inc.',
     href: 'https://www.forescout.com/',
+    logo: logos.forescout,
     title: 'Software Development Engineer in Test',
     domain: 'Cybersecurity',
     timeline: 'Nov 2025 – Present',
@@ -69,6 +107,7 @@ export const experience = [
   {
     company: 'Calvi Insight',
     href: 'https://www.calvi-insight.com/',
+    logo: logos.calvi,
     title: 'Software Test Automation Engineer / QA',
     domain: 'Billing Solutions / Telecom',
     timeline: 'Apr 2025 – Oct 2025',
@@ -77,6 +116,7 @@ export const experience = [
   {
     company: 'SeeWay.ai',
     href: 'https://www.seeway.ai/',
+    logo: logos.seeway,
     title: 'Software Test Engineer / Python Developer',
     domain: 'Mobility / Mapping',
     timeline: 'Jan 2022 – Mar 2025',
@@ -85,6 +125,7 @@ export const experience = [
   {
     company: 'Huawei',
     href: 'https://www.huawei.com/',
+    logo: logos.huawei,
     title: 'Software Test Engineer',
     domain: 'Mobile / Navigation',
     timeline: 'May 2021 – Dec 2021',
@@ -93,6 +134,7 @@ export const experience = [
   {
     company: 'Ericsson',
     href: 'https://www.ericsson.com/',
+    logo: logos.ericsson,
     title: 'Software Test Engineer',
     domain: 'Bill & Payment Solutions',
     timeline: 'Nov 2019 – May 2021',
