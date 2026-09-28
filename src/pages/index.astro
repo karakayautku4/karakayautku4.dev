@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CompanyLogo from '../components/CompanyLogo.astro';
 import { currentRole, homeLead, site } from '../data/site';
 ---
 
@@ -22,7 +23,10 @@ import { currentRole, homeLead, site } from '../data/site';
   <section class="callout" aria-labelledby="current-role">
     <p class="eyebrow">Current role</p>
     <h2 id="current-role">
-      <a href={currentRole.href} rel="noopener noreferrer">{currentRole.company}</a>
+      <a class="company-link" href={currentRole.href} rel="noopener noreferrer">
+        <CompanyLogo logo={currentRole.logo} size="callout" />
+        <span class="company-name">{currentRole.company}</span>
+      </a>
     </h2>
     <p>{currentRole.title}</p>
     <p class="meta">{currentRole.domain} · {currentRole.timeline} · {currentRole.place}</p>
