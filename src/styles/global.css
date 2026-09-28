@@ -312,21 +312,9 @@ h1 {
 
 .company-link {
   display: inline-flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 0.55rem 0.7rem;
   max-width: 100%;
   text-decoration: none;
-}
-
-.company-link .company-name {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
-}
-
-.company-link:hover .company-name {
-  text-decoration-thickness: 2px;
 }
 
 .company-mark {

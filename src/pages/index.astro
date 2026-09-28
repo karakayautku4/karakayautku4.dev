@@ -25,7 +25,7 @@ import { currentRole, homeLead, site } from '../data/site';
     <h2 id="current-role">
       <a class="company-link" href={currentRole.href} rel="noopener noreferrer">
         <CompanyLogo logo={currentRole.logo} size="callout" />
-        <span class="company-name">{currentRole.company}</span>
+        <span class="visually-hidden">{currentRole.company}</span>
       </a>
     </h2>
     <p>{currentRole.title}</p>
