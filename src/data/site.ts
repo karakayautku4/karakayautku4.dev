@@ -31,8 +31,6 @@ export const nav = [
 
 export const socials = [
   { href: 'https://github.com/karakayautku4', label: 'GitHub', icon: 'github' },
-  { href: 'https://tryhackme.com/p/karakayautku4', label: 'TryHackMe', icon: 'tryhackme' },
-  { href: 'https://www.hackerrank.com/karakayautku4', label: 'HackerRank', icon: 'hackerrank' },
   { href: 'https://linkedin.com/in/karakayautku4', label: 'LinkedIn', icon: 'linkedin' },
   { href: 'https://x.com/karakayautku4', label: 'X', icon: 'x' },
   { href: 'https://instagram.com/karakayautku4', label: 'Instagram', icon: 'instagram' },
@@ -177,7 +175,7 @@ export const education = [
 ] as const;
 
 export const interests =
-  'ML, cybersecurity labs (TryHackMe / HackTheBox), DIY hardware, basketball.';
+  'ML, cybersecurity labs (HackTheBox), DIY hardware, basketball.';
 
 export const projects = {
   title: 'Projects',

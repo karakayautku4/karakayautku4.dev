@@ -274,7 +274,7 @@ def build_story(style: dict[str, ParagraphStyle]):
     story.append(Paragraph("HOBBIES", style["section"]))
     story.append(
         Paragraph(
-            "I love high technology related gadgets and devices, following technology and innovation news. I am very interested in Machine Learning/Deep Learning, Cybersecurity. In my free time I try to hack machines, trying to find vulnerabilities by using some plaforms like tryhackme/hackthebox. I like building DIY devices like drones and their components such as flying control unit by using RaspberryPi/Arduino. Also very interested in basketball and even played professionally in my university years in a sports club called Turkish Telecom. After my basketball career, I also worked as a professional basketball referee in the Turkish Basketball League.",
+            "I love high technology related gadgets and devices, following technology and innovation news. I am very interested in Machine Learning/Deep Learning, Cybersecurity. In my free time I try to hack machines, trying to find vulnerabilities by using platforms like HackTheBox. I like building DIY devices like drones and their components such as flying control unit by using RaspberryPi/Arduino. Also very interested in basketball and even played professionally in my university years in a sports club called Turkish Telecom. After my basketball career, I also worked as a professional basketball referee in the Turkish Basketball League.",
             style["body_gap"],
         )
     )
