@@ -544,34 +544,6 @@ h1 {
   font-weight: 600;
 }
 
-.stub-card {
-  padding: 1.15rem 1.25rem;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-}
-
-.stub-card h3 {
-  margin: 0.2rem 0 0;
-  font-size: 1.2rem;
-}
-
-.stub-note,
-.stub-card > p {
-  margin: 0.55rem 0 0;
-  max-width: 46rem;
-}
-
-.stub-note {
-  color: var(--muted);
-  font-weight: 600;
-}
-
-.stub-card .pills {
-  margin-top: 0.9rem;
-}
-
 .section-block > h2 {
   margin-bottom: 0.9rem;
   font-size: 1.35rem;
