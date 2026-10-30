@@ -32,6 +32,7 @@ try {
           return Boolean(repo) && typeof repo === 'object' && repo.fork !== true;
         })
         .filter((repo) => typeof repo.name === 'string' && typeof repo.html_url === 'string')
+        .filter((repo) => repo.name !== 'hubbub' && repo.name !== 'homebrew-hubbub')
         .slice(0, 6)
         .map((repo) => ({
           name: String(repo.name),
@@ -61,19 +62,25 @@ try {
     </p>
   </header>
 
-  {
-    repos.length > 0 && (
-      <ul class="repo-grid">
-        {repos.map((repo) => (
-          <li>
-            <a class="repo-card" href={repo.href} rel="noopener noreferrer">
-              <h2>{repo.name}</h2>
-              {repo.description && <p>{repo.description}</p>}
-              {repo.language && <p class="repo-language">{repo.language}</p>}
-            </a>
-          </li>
-        ))}
-      </ul>
-    )
-  }
+  <ul class="repo-grid">
+    <li>
+      <a class="repo-card repo-featured" href={projects.featured.href} rel="noopener noreferrer">
+        <img src={projects.featured.icon} alt="" width="48" height="48" />
+        <h2>{projects.featured.name}</h2>
+        <p>{projects.featured.description}</p>
+        <p class="repo-language">{projects.featured.meta}</p>
+      </a>
+    </li>
+    {
+      repos.map((repo) => (
+        <li>
+          <a class="repo-card" href={repo.href} rel="noopener noreferrer">
+            <h2>{repo.name}</h2>
+            {repo.description && <p>{repo.description}</p>}
+            {repo.language && <p class="repo-language">{repo.language}</p>}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </BaseLayout>
