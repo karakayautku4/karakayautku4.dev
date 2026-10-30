@@ -182,4 +182,12 @@ export const projects = {
   paragraphs: ['Code and recent activity are on GitHub.'],
   githubLabel: 'GitHub',
   githubHref: 'https://github.com/karakayautku4',
+  featured: {
+    name: 'Hubbub',
+    description:
+      'macOS menu bar app that shows AI coding agent sessions as a tiny interactive 3D world, with tokens, context and cost at a glance.',
+    meta: 'Swift · macOS',
+    href: 'https://karakayautku4.github.io/hubbub/',
+    icon: '/images/hubbub-icon.png',
+  },
 } as const;
